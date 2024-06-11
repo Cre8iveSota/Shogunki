@@ -60,7 +60,7 @@
           - return the same position if the obstructing character is the different owner as the character which is moving
       - void DisplayMovablePos(int x, int y)
         - Change Parameter of BoardInfo's peoperty by input
-- Role.cs
+- CharacterModel.cs
   - This is the class for role and management info of master player tapped, client player tapped and ownership
     - Property:
       - int id: roleNo + 2DigitFirstCoordinate(+ coordinate: 0, - coordinate: 1 | ex (1,3) => 0103, ex (-2,3) => 1203) + firstOwner(0: master / 1: client)

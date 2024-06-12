@@ -17,7 +17,12 @@ public class RangeOfMovementOnBoard : MonoBehaviour
 
     }
 
-    (int x, int y)[] IndicateMovablePosition(int[,] currentPos, Role role, bool isMasterPlayer){
-        return [(1,1),(2,2)];
+    (int x, int y)[] IndicateMovablePosition(int[,] currentPos, Role role, bool isMasterPlayer)
+    {
+        if (role == Role.HoheiId)
+        {
+            // Todo: Bordinfo for return the info of grid data : isMaster for judgge controller ,null for indigation of out of field
+        }
+        return new (int, int)[] { (1, 1), (1, 2) };
     }
 }

@@ -222,9 +222,10 @@ GameObject:
   - component: {fileID: 2109135566031947485}
   - component: {fileID: 2039453542465564627}
   - component: {fileID: 5395266455390874921}
+  - component: {fileID: 8462226090477017046}
   m_Layer: 0
   m_Name: GridSquare
-  m_TagString: Untagged
+  m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -313,12 +314,28 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8462226090477017046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2639029033167361166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2f966a82801448c8273f6cb8a79f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMasterTapped: 0
+  isClientTapped: 0
+  isMovablePos: 0
+  isCurrentPos: 0
 --- !u!1 &5076072262612260781
 GameObject:
   m_ObjectHideFlags: 0

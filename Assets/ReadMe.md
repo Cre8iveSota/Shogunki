@@ -76,8 +76,9 @@
         - Change the coorinate of this character
         - Chnage the isTurnPlayerMoved true
       - void Attack()
-        - call GetCharacterOnBoard and change the status of isAlive and ownership
-      - void DefineId()
+        <!-- - call GetCharacterOnBoard -->
+        - and change the status of isAlive and ownership
+        <!-- - void DefineId() -->
       - int[,] GetCurrentPos()
 - BoardManager.cs
 
@@ -94,7 +95,7 @@
   - Method:
     - void DetectToch(bool isMaster, bool isClient, (int x, int y)coordinate)
       - Change the status of each BoardInfo as isMasterTapped/isClientTapped to false except input coordinate
-    - int id GetCharacterOnBoard(int x, y)
+      <!-- - int id GetCharacterOnBoard(int x, y) -->
 
 - BoardInfo.cs
   - Manage each board info
@@ -109,3 +110,6 @@
       - change color as current pos if the isCurrentPos true && (isMasterTapped== true || isClientTapped ==true)
       - change color as isMovablePos if the isMovablePos true
     - void NoticeTapped(bool isMaster, int[,] pos)
+    - ChangeGridInfo
+      - OnTriggerEnter
+        - if the GridSquare is hit Character, insert/update BoardInfo

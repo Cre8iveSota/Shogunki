@@ -436,7 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 7
 --- !u!65 &8974188505810548301
 BoxCollider:
   m_ObjectHideFlags: 0

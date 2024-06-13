@@ -13,10 +13,12 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
     bool isMasterPlayerTapped = false;
     bool isClientPlayerTapped = false;
     bool isAlive = true;
-    Transform currentPos;
+    Vector3 currentPos;
+
     BoardManager boardManager;
     BoardInfo boardInfo;
-    [SerializeField] Role role;
+    [SerializeField] private Role role;
+    public Role Role { get { return role; } set { role = value; } }
     void Start()
     {
         boardManager = GameObject.FindGameObjectWithTag("BM").GetComponent<BoardManager>();
@@ -26,7 +28,10 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
     void Update()
     {
         // Todo: If I have a afford to fix here, move this ColorPos() from Update Method. This is because, it does not have meaning to call every seconds.
-        if (boardManager.CurrentPos != currentPos) { boardInfo.ColorPos(false); }
+        if (boardManager.CurrentPos != currentPos)
+        {
+            boardInfo.ColorPos(false, false);
+        }
     }
 
     #region Create Id Methods
@@ -162,13 +167,14 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         print($"オブジェクト{name} ({eventData.pointerPress}) がクリックされたよ！");
         boardManager.TouchedChara = eventData.pointerPress;
         boardManager.CurrentPos = currentPos;
-        if (boardManager.CurrentPos == currentPos) { boardInfo.ColorPos(true); }
+        boardManager.CharacterModelForTransfer = GetComponent<CharacterModel>();
+        if (boardManager.CurrentPos == currentPos) { boardInfo.ColorPos(true, false); }
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Grid")
         {
-            currentPos = other.transform;
+            currentPos = other.transform.position;
             boardInfo = other.GetComponent<BoardInfo>();
         }
     }

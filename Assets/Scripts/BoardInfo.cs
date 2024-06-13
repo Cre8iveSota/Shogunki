@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,11 +20,31 @@ public class BoardInfo : MonoBehaviour
     void Start()
     {
         boardManager = GameObject.FindGameObjectWithTag("BM").GetComponent<BoardManager>();
+
+        boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.MasterCharacterExist, false);
+    }
+
+    public void RegisterIntoBoardDataBank(bool isMasterTurn)
+    {
+        Collider[] colliders = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.localScale / 2, Quaternion.identity);
+        foreach (var collider in colliders)
+        {
+            if (collider.gameObject.CompareTag("MasterCharacter"))
+            {
+                Debug.Log($"RegisterIntoBoardDataBank is working; Add BoardMasterDic as Master  - x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.MasterCharacterExist}, isMovablePos :{false}");
+                boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.MasterCharacterExist, !isMasterTurn);
+            }
+            if (collider.gameObject.CompareTag("ClientCharacter"))
+            {
+                Debug.Log($"RegisterIntoBoardDataBank is working; Add BoardMasterDic as Client- x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.ClientCharacterExist}, isMovablePos : {false}");
+                boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.ClientCharacterExist, isMasterTurn);
+            }
+        }
     }
 
     // Update is called once per frame
 
-    public void ColorPos(bool isCurrentPos, bool isMovablePos = false, bool isMasterCharaTapped = false, bool isClientCharaTapped = false)
+    public void ColorPos(bool isCurrentPos, bool isMovablePos, bool isMasterCharaTapped = false, bool isClientCharaTapped = false)
     {
         // Todo: before online mode, to check the player who toched screen is unnecessary; Instead, to detect somebody touch or not is necessary
         // So, this is fraft until creating online mode
@@ -36,10 +57,19 @@ public class BoardInfo : MonoBehaviour
         // {
         if (isCurrentPos)
         {
-            if (boardManager.CurrentPos == transform)
+            if (boardManager.CurrentPos == transform.position)
             {
                 Debug.Log("Color Change Red");
                 GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            }
+        }
+        else if (isMovablePos)
+        {
+            Debug.Log($"boardManager.MovablePos: {boardManager.MovablePos} transform: {transform.position} ");
+            if (boardManager.MovablePos == transform.position)
+            {
+                Debug.Log("Color Change Black");
+                GetComponent<Renderer>().material.SetColor("_Color", Color.black);
             }
         }
         else
@@ -55,25 +85,25 @@ public class BoardInfo : MonoBehaviour
     }
 
     // below Method is desearved as ChangeGridInfo
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("MasterCharacter"))
-        {
-            Debug.Log($"Add BoardMasterDic as Master - x: {(int)transform.position.x}, y: {(int)transform.position.z}, z: {BoardStatus.MasterCharacterExist}");
-            boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.MasterCharacterExist);
-        }
-        if (other.gameObject.CompareTag("ClientCharacter"))
-        {
-            Debug.Log($"Add BoardMasterDic as Client- x: {(int)transform.position.x}, y: {(int)transform.position.z}, z: {BoardStatus.MasterCharacterExist}");
-            boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.ClientCHaracterExist);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("MasterCharacter") || other.gameObject.CompareTag("ClientCharacter"))
-        {
-            Debug.Log($"Remove BoardMasterDicx: {(int)transform.position.x}, y: {(int)transform.position.z}, z: {BoardStatus.MasterCharacterExist}");
-            boardManager.RemoveBoardData((int)transform.position.x, (int)transform.position.z);
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.gameObject.CompareTag("MasterCharacter"))
+    //     {
+    //         Debug.Log($"Add BoardMasterDic as Master - x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.MasterCharacterExist}, isMovablePos :{false}");
+    //         boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.MasterCharacterExist, false);
+    //     }
+    //     if (other.gameObject.CompareTag("ClientCharacter"))
+    //     {
+    //         Debug.Log($"Add BoardMasterDic as Client- x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.MasterCharacterExist}, isMovablePos : {false}");
+    //         boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.ClientCharacterExist, false);
+    //     }
+    // }
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     if (other.gameObject.CompareTag("MasterCharacter") || other.gameObject.CompareTag("ClientCharacter"))
+    //     {
+    //         Debug.Log($"Remove BoardMasterDic x: {(int)transform.position.x}, y: {(int)transform.position.z}, z: {BoardStatus.MasterCharacterExist}");
+    //         boardManager.RemoveBoardData((int)transform.position.x, (int)transform.position.z);
+    //     }
+    // }
 }

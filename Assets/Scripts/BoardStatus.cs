@@ -7,5 +7,5 @@ public enum BoardStatus
     outOfTheBoard,
     Empty,
     MasterCharacterExist,
-    ClientCHaracterExist,
+    ClientCharacterExist,
 }

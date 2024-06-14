@@ -20,8 +20,9 @@ public class BoardManager : MonoBehaviour
             Debug.Log($"current mouse Pos: {currentPos}");
         }
     }
-    private BiDirectionalDictionary<(int x, int y), int> movablePos = new BiDirectionalDictionary<(int x, int y), int>();
-    public BiDirectionalDictionary<(int x, int y), int> MovablePos { get { return movablePos; } set { movablePos = value; Debug.Log($"movable mouse Pos: {movablePos}"); } }
+    private List<(int x, int y)> movablePos = new List<(int x, int y)>();
+    public List<(int x, int y)> MovablePos { get { return movablePos; } set { movablePos = value; Debug.Log($"movable mouse Pos: {movablePos}"); } }
+    public List<(int, int)> pastMovablePos = new List<(int x, int y)>();
     private Dictionary<(int x, int y), (BoardStatus, bool? isMovablePos)> boardDataBank = new Dictionary<(int x, int y), (BoardStatus, bool? isMovablePos)>(); // if isMovablePos == null, which means depends on your Chara or not
     public IReadOnlyDictionary<(int x, int y), (BoardStatus, bool? isMovablePos)> BoardDataBank => boardDataBank;
     private GameManager gameManager;
@@ -46,7 +47,6 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private Vector3 gridUnitSize = new Vector3(2, 0, 2);
     private GameObject[] grids;
     private Dictionary<(int x, int y), GameObject> gridsPosDictionary = new Dictionary<(int x, int y), GameObject>();
-    public List<(int, int)> pastMovablePos = new List<(int x, int y)>();
 
     private void Start()
     {
@@ -76,12 +76,9 @@ public class BoardManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            foreach ((int, int) item in MovablePos.Keys)
+            foreach ((int, int) item in MovablePos)
             {
-                if (MovablePos.TryGetByKey(item, out int value))
-                {
-                    Debug.Log($"BoardDataBank data show - Key: {item} - Value:  {value} ");
-                }
+                Debug.Log($"BoardDataBank data show - : {item}");
             }
         }
         if (Input.GetKeyDown(KeyCode.J))
@@ -164,9 +161,6 @@ public class BoardManager : MonoBehaviour
     {
         Debug.Log("boardDataBank count: " + boardDataBank.Count());
 
-        int maxTimeValue = MovablePos.Values.Any() ? MovablePos.Values.Max() : 0;
-        Debug.Log($"The latest time is: {maxTimeValue}");
-
         List<(int x, int y)> movableKeys = boardDataBank
             .Where(entry => entry.Value.isMovablePos == true)
             .Select(entry => entry.Key)
@@ -180,7 +174,7 @@ public class BoardManager : MonoBehaviour
             {
                 Debug.Log("gameManager.EntireTime: " + gameManager.EntireTime);
 
-                MovablePos.Add(movableKey, gameManager.EntireTime);
+                MovablePos.Add(movableKey);
                 Debug.Log("Call Grid's Change Color Method");
                 gridsPosDictionary[movableKey].GetComponent<BoardInfo>().ColorPos(false, true);
             }

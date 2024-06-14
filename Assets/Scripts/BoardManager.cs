@@ -9,17 +9,19 @@ public class BoardManager : MonoBehaviour
     private GameObject tochedChara;
     public GameObject TouchedChara { get { return tochedChara; } set { tochedChara = value; Debug.Log($"changed touched chara: {value}"); } }
     private Vector3 currentPos;
+    private Vector3 lastPos;
     public Vector3 CurrentPos
     {
         get { return currentPos; }
         set
         {
+            lastPos = currentPos;
             currentPos = value;
             Debug.Log($"current mouse Pos: {currentPos}");
         }
     }
-    private Vector3 movablePos;
-    public Vector3 MovablePos { get { return movablePos; } set { movablePos = value; Debug.Log($"movable mouse Pos: {movablePos}"); } }
+    private BiDirectionalDictionary<(int x, int y), int> movablePos = new BiDirectionalDictionary<(int x, int y), int>();
+    public BiDirectionalDictionary<(int x, int y), int> MovablePos { get { return movablePos; } set { movablePos = value; Debug.Log($"movable mouse Pos: {movablePos}"); } }
     private Dictionary<(int x, int y), (BoardStatus, bool? isMovablePos)> boardDataBank = new Dictionary<(int x, int y), (BoardStatus, bool? isMovablePos)>(); // if isMovablePos == null, which means depends on your Chara or not
     public IReadOnlyDictionary<(int x, int y), (BoardStatus, bool? isMovablePos)> BoardDataBank => boardDataBank;
     private GameManager gameManager;
@@ -29,14 +31,22 @@ public class BoardManager : MonoBehaviour
         get { return characterModelForTransfer; }
         set
         {
+            // last movable pos is gonna be deleted
+            if (characterModelForTransfer != null)
+            {
+                Debug.Log($"expected last pos : x: {(int)lastPos.x},y: {(int)lastPos.y}");
+                CalculateMovablePos((int)lastPos.x, (int)lastPos.y, characterModelForTransfer, false);
+            }
             characterModelForTransfer = value;
-            CalculateMovablePos((int)currentPos.x, (int)currentPos.y, characterModelForTransfer);
+            Debug.Log($"real current pos : x: {(int)currentPos.x},y: {(int)currentPos.y}");
+            CalculateMovablePos((int)currentPos.x, (int)currentPos.y, characterModelForTransfer, true);
             CallChangeColorMovablePos();
         }
     }
     [SerializeField] private Vector3 gridUnitSize = new Vector3(2, 0, 2);
     private GameObject[] grids;
     private Dictionary<(int x, int y), GameObject> gridsPosDictionary = new Dictionary<(int x, int y), GameObject>();
+    public List<(int, int)> pastMovablePos = new List<(int x, int y)>();
 
     private void Start()
     {
@@ -62,6 +72,23 @@ public class BoardManager : MonoBehaviour
             foreach (var item in BoardDataBank)
             {
                 Debug.Log($"BoardDataBank data show - Key: {item.Key} - Value: {item.Value}  ");
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            foreach ((int, int) item in MovablePos.Keys)
+            {
+                if (MovablePos.TryGetByKey(item, out int value))
+                {
+                    Debug.Log($"BoardDataBank data show - Key: {item} - Value:  {value} ");
+                }
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            foreach ((int, int) item in pastMovablePos)
+            {
+                Debug.Log($"pastMovablePos data show - {item} - ");
             }
         }
     }
@@ -94,16 +121,21 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    private void CalculateMovablePos(int x, int y, CharacterModel characterModel)
+    private void CalculateMovablePos(int x, int y, CharacterModel characterModel, bool isCurrent)
     {
         var movablePositions = characterModel.RangeOfMovementAsRole();
 
+        UpdateMovablePos(movablePositions, isCurrent);
+    }
+
+    private void UpdateMovablePos((int x, int y)[] movablePositions, bool isCurrent)
+    {
         if (movablePositions != null)
         {
             foreach (var pos in movablePositions)
             {
-                int movablePosX = (int)(currentPos.x + pos.x * gridUnitSize.x);
-                int movablePosY = (int)(currentPos.z + pos.y * gridUnitSize.z);
+                int movablePosX = isCurrent ? (int)(currentPos.x + pos.x * gridUnitSize.x) : (int)(lastPos.x + pos.x * gridUnitSize.x);
+                int movablePosY = isCurrent ? (int)(currentPos.z + pos.y * gridUnitSize.z) : (int)(lastPos.z + pos.y * gridUnitSize.z);
                 Debug.Log($"Movable position: ({movablePosX}, {movablePosY})");
                 if (TryGetBoardData(movablePosX, movablePosY, out BoardStatus status, out bool? isMovable))
                 {
@@ -116,25 +148,8 @@ public class BoardManager : MonoBehaviour
                     )
                     {
                         // ↑ not implemented for these situations that (status == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn) and (status == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn) due to unnecessary so far
-                        AddBoardData(movablePosX, movablePosY, BoardStatus.Empty, true); //  this means some same team meamber on the grid, so this record of isMovable is gonna be false;
-                        Debug.Log($"Add boardDataBank as movablePos, x:{movablePosX} , y: {movablePosY}, BoardStatus: {BoardStatus.Empty}, isMovablePos: {true}");
-                    }
-                }
-                else
-                {
-                    if (
-                        status == BoardStatus.Empty
-                        || (status == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
-                        || (status == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn)
-                        )
-                    {
-                        // ↑ not implemented for these situations that (status == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn) and (status == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn) due to unnecessary so far
-                        AddBoardData(movablePosX, movablePosY, BoardStatus.Empty, true); //  this means some same team meamber on the grid, so this record of isMovable is gonna be false;
-                        Debug.Log($"Add boardDataBank as movablePos, x:{movablePosX} , y: {movablePosY}, BoardStatus: {BoardStatus.Empty}, isMovablePos: {true}");
-                    }
-                    else
-                    {
-                        Debug.Log("SOMETHING WRONG");
+                        AddBoardData(movablePosX, movablePosY, BoardStatus.Empty, isCurrent); //  this means some same team meamber on the grid, so this record of isMovable is gonna be false;
+                        Debug.Log($"Add boardDataBank as movablePos, x:{movablePosX} , y: {movablePosY}, BoardStatus: {BoardStatus.Empty}, isMovablePos: {isCurrent}");
                     }
                 }
             }
@@ -147,22 +162,42 @@ public class BoardManager : MonoBehaviour
 
     private void CallChangeColorMovablePos()
     {
-        Debug.Log("start CallChangeColorMovablePos()");
         Debug.Log("boardDataBank count: " + boardDataBank.Count());
-        // isMovablePos == true  にするところを確認する
+
+        int maxTimeValue = MovablePos.Values.Any() ? MovablePos.Values.Max() : 0;
+        Debug.Log($"The latest time is: {maxTimeValue}");
+
         List<(int x, int y)> movableKeys = boardDataBank
-        .Where(entry => entry.Value.isMovablePos == true)
-        .Select(entry => entry.Key)
-        .ToList();
+            .Where(entry => entry.Value.isMovablePos == true)
+            .Select(entry => entry.Key)
+            .ToList();
+
         Debug.Log("movableKeys count: " + movableKeys.Count());
-        foreach ((int, int) movableKey in movableKeys)
+        foreach ((int x, int y) movableKey in movableKeys)
         {
             Debug.Log("Color target movableKey is" + movableKey);
             if (gridsPosDictionary.ContainsKey(movableKey))
             {
-                MovablePos = new Vector3(movableKey.Item1, 0, movableKey.Item2);
+                Debug.Log("gameManager.EntireTime: " + gameManager.EntireTime);
+
+                MovablePos.Add(movableKey, gameManager.EntireTime);
                 Debug.Log("Call Grid's Change Color Method");
                 gridsPosDictionary[movableKey].GetComponent<BoardInfo>().ColorPos(false, true);
+            }
+        }
+
+        List<(int x, int y)> unmovableKeys = boardDataBank
+            .Where(entry => entry.Value.isMovablePos == false)
+            .Select(entry => entry.Key)
+            .ToList();
+
+        foreach ((int x, int y) unmovableKey in unmovableKeys)
+        {
+            Debug.Log("Color target ummovableKey is" + unmovableKey);
+            if (gridsPosDictionary.ContainsKey(unmovableKey))
+            {
+                Debug.Log("Call Grid's Change Color Method for umbovable");
+                gridsPosDictionary[unmovableKey].GetComponent<BoardInfo>().ColorPos(false, false);
             }
         }
     }

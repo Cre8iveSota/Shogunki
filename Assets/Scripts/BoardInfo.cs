@@ -44,6 +44,11 @@ public class BoardInfo : MonoBehaviour
 
     // Update is called once per frame
 
+    private void ColoringGrid(Color color)
+    {
+        GetComponent<Renderer>().material.SetColor("_Color", color);
+    }
+
     public void ColorPos(bool isCurrentPos, bool isMovablePos, bool isMasterCharaTapped = false, bool isClientCharaTapped = false)
     {
         // Todo: before online mode, to check the player who toched screen is unnecessary; Instead, to detect somebody touch or not is necessary
@@ -60,21 +65,26 @@ public class BoardInfo : MonoBehaviour
             if (boardManager.CurrentPos == transform.position)
             {
                 Debug.Log("Color Change Red");
-                GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+                ColoringGrid(Color.red);
             }
         }
         else if (isMovablePos)
         {
             Debug.Log($"boardManager.MovablePos: {boardManager.MovablePos} transform: {transform.position} ");
-            if (boardManager.MovablePos == transform.position)
+
+            if (boardManager.MovablePos != null && boardManager.MovablePos.Count > 0)
             {
                 Debug.Log("Color Change Black");
-                GetComponent<Renderer>().material.SetColor("_Color", Color.black);
+                ColoringGrid(Color.black);
+            }
+            else
+            {
+                Debug.Log("The dictionary is empty.");
             }
         }
         else
         {
-            GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+            ColoringGrid(Color.white);
         }
         // }
         // Todo: fix when it begin to create online mode
@@ -85,25 +95,25 @@ public class BoardInfo : MonoBehaviour
     }
 
     // below Method is desearved as ChangeGridInfo
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag("MasterCharacter"))
-    //     {
-    //         Debug.Log($"Add BoardMasterDic as Master - x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.MasterCharacterExist}, isMovablePos :{false}");
-    //         boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.MasterCharacterExist, false);
-    //     }
-    //     if (other.gameObject.CompareTag("ClientCharacter"))
-    //     {
-    //         Debug.Log($"Add BoardMasterDic as Client- x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.MasterCharacterExist}, isMovablePos : {false}");
-    //         boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.ClientCharacterExist, false);
-    //     }
-    // }
-    // private void OnTriggerExit(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag("MasterCharacter") || other.gameObject.CompareTag("ClientCharacter"))
-    //     {
-    //         Debug.Log($"Remove BoardMasterDic x: {(int)transform.position.x}, y: {(int)transform.position.z}, z: {BoardStatus.MasterCharacterExist}");
-    //         boardManager.RemoveBoardData((int)transform.position.x, (int)transform.position.z);
-    //     }
-    // }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("MasterCharacter"))
+        {
+            Debug.Log($"Add BoardMasterDic as Master - x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.MasterCharacterExist}, isMovablePos :{false}");
+            boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.MasterCharacterExist, false);
+        }
+        if (other.gameObject.CompareTag("ClientCharacter"))
+        {
+            Debug.Log($"Add BoardMasterDic as Client- x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.MasterCharacterExist}, isMovablePos : {false}");
+            boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.ClientCharacterExist, false);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("MasterCharacter") || other.gameObject.CompareTag("ClientCharacter"))
+        {
+            Debug.Log($"Remove BoardMasterDic x: {(int)transform.position.x}, y: {(int)transform.position.z}, z: {BoardStatus.MasterCharacterExist}");
+            boardManager.RemoveBoardData((int)transform.position.x, (int)transform.position.z);
+        }
+    }
 }

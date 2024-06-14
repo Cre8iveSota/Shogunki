@@ -1858,7 +1858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 3
 --- !u!65 &9205935416588571065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7772,7 +7772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 6
 --- !u!65 &7905315212735019925
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10233,7 +10233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 4
 --- !u!65 &8324458096613249121
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10419,7 +10419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 5
 --- !u!65 &5881218543695690098
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10667,7 +10667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 3
 --- !u!65 &1796822668756642859
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11014,7 +11014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 2
 --- !u!65 &4231899422730364076
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12045,7 +12045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 1
 --- !u!65 &4792831155658889779
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12338,7 +12338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 2
 --- !u!65 &6612752514574210420
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17160,7 +17160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 4
 --- !u!65 &151564667070126298
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21781,7 +21781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 7
 --- !u!65 &4669451214716570620
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22985,7 +22985,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
-  role: 0
+  role: 1
 --- !u!65 &7459295010531983554
 BoxCollider:
   m_ObjectHideFlags: 0

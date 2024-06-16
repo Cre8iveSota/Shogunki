@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour
@@ -35,12 +36,12 @@ public class BoardManager : MonoBehaviour
             // last movable pos is gonna be deleted
             if (characterModelForTransfer != null)
             {
-                Debug.Log($"expected last pos : x: {(int)lastPos.x},y: {(int)lastPos.y}");
-                CalculateMovablePos((int)lastPos.x, (int)lastPos.y, characterModelForTransfer, false);
+                Debug.Log($"expected last pos : x: {(int)lastPos.x},y: {(int)lastPos.z}");
+                CalculateMovablePos((int)lastPos.x, (int)lastPos.z, characterModelForTransfer, false);
             }
             characterModelForTransfer = value;
-            Debug.Log($"real current pos : x: {(int)currentPos.x},y: {(int)currentPos.y}");
-            CalculateMovablePos((int)currentPos.x, (int)currentPos.y, characterModelForTransfer, true);
+            Debug.Log($"real current pos : x: {(int)currentPos.x},y: {(int)currentPos.z}");
+            CalculateMovablePos((int)currentPos.x, (int)currentPos.z, characterModelForTransfer, true);
             CallChangeColorMovablePos();
         }
     }
@@ -61,7 +62,6 @@ public class BoardManager : MonoBehaviour
                 Vector3 gridPos = grid.transform.position;
                 gridsPosDictionary.Add(((int)gridPos.x, (int)gridPos.z), grid);
                 Debug.Log($"Dictionary grids got entity- x:{(int)gridPos.x}, z: {(int)gridPos.z}, obj: {grid}");
-                grid.GetComponent<BoardInfo>()?.RegisterIntoBoardDataBank(gameManager.IsMasterTurn);
             }
         }
     }
@@ -78,7 +78,7 @@ public class BoardManager : MonoBehaviour
         {
             foreach ((int, int) item in MovablePos)
             {
-                Debug.Log($"BoardDataBank data show - : {item}");
+                Debug.Log($"Movable data show - : {item}");
             }
         }
         if (Input.GetKeyDown(KeyCode.J))
@@ -89,7 +89,7 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-    public void AddBoardData(int x, int y, BoardStatus status, bool isMovablePos)
+    public void AddBoardData(int x, int y, BoardStatus status, bool? isMovablePos)
     {
         var key = (x, y);
         boardDataBank[key] = (status, isMovablePos); // 既存のキーなら更新、なければ追加
@@ -120,16 +120,18 @@ public class BoardManager : MonoBehaviour
 
     private void CalculateMovablePos(int x, int y, CharacterModel characterModel, bool isCurrent)
     {
-        var movablePositions = characterModel.RangeOfMovementAsRole();
+        var possibleMovablePos = characterModel.RangeOfMovementAsRole();
 
-        UpdateMovablePos(movablePositions, isCurrent);
+        UpdateMovablePos(possibleMovablePos, isCurrent);
     }
 
-    private void UpdateMovablePos((int x, int y)[] movablePositions, bool isCurrent)
+    private void UpdateMovablePos((int x, int y)[] possibleMovablePos, bool isCurrent)
     {
-        if (movablePositions != null)
+        ResetAllGridAsMovableIsFalse();
+        List<(int, int)> unMovableList = new List<(int, int)>();
+        if (possibleMovablePos != null)
         {
-            foreach (var pos in movablePositions)
+            foreach (var pos in possibleMovablePos)
             {
                 int movablePosX = isCurrent ? (int)(currentPos.x + pos.x * gridUnitSize.x) : (int)(lastPos.x + pos.x * gridUnitSize.x);
                 int movablePosY = isCurrent ? (int)(currentPos.z + pos.y * gridUnitSize.z) : (int)(lastPos.z + pos.y * gridUnitSize.z);
@@ -140,13 +142,330 @@ public class BoardManager : MonoBehaviour
                     Debug.Log($"BoardDataBank data show before checking status- x: {movablePosX} - y: {movablePosY}");
                     if (
                         status == BoardStatus.Empty
-                        || (status == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
-                        || (status == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn)
+                    || (status == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
+                    || (status == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn)
                     )
                     {
                         // ↑ not implemented for these situations that (status == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn) and (status == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn) due to unnecessary so far
-                        AddBoardData(movablePosX, movablePosY, BoardStatus.Empty, isCurrent); //  this means some same team meamber on the grid, so this record of isMovable is gonna be false;
-                        Debug.Log($"Add boardDataBank as movablePos, x:{movablePosX} , y: {movablePosY}, BoardStatus: {BoardStatus.Empty}, isMovablePos: {isCurrent}");
+                        AddBoardData(movablePosX, movablePosY, status, isCurrent); //  this means some same team meamber on the grid, so this record of isMovable is gonna be false;
+                        Debug.Log($"Add boardDataBank as movablePos, x:{movablePosX} , y: {movablePosY}, BoardStatus: {status}, isMovablePos: {isCurrent}");
+                    }
+                    else if (
+                        (status == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn)
+                    || (status == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn)
+                    )
+                    {
+                        unMovableList.Add((movablePosX, movablePosY));
+                        Debug.Log($"unMovableList add :({movablePosX},{movablePosY})");
+                    }
+                }
+            }
+
+
+            // Check the movablePos is continious
+            List<(int x, int y)> movablePosOnBoard = new List<(int, int)>();
+            if (characterModelForTransfer.Role == Role.KakugyoId || characterModelForTransfer.Role == Role.NariKakuId)
+            {
+                for (int posXposY = 1; posXposY < 9; posXposY++)
+                {
+                    if (TryGetBoardData((int)(currentPos.x + gridUnitSize.x * posXposY), (int)(currentPos.z + gridUnitSize.z * posXposY), out BoardStatus st, out bool? ismovablePos))
+                    {
+                        Debug.Log($"Status of Board: ({(int)(currentPos.x + gridUnitSize.x * posXposY)},{(int)(currentPos.z + gridUnitSize.z * posXposY)}), st: {st}, bool: {ismovablePos} ");
+                        if ((st == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn)
+                         )
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x + gridUnitSize.x * posXposY), (int)(currentPos.z + gridUnitSize.z * posXposY)));
+                            break;
+                        }
+                        else if ((st == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn))
+                        {
+                            break;
+                        }
+                        else if (st == BoardStatus.Empty)
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x + gridUnitSize.x * posXposY), (int)(currentPos.z + gridUnitSize.z * posXposY)));
+                        }
+                    }
+                }
+                for (int posXnegaY = 1; posXnegaY < 9; posXnegaY++)
+                {
+                    if (TryGetBoardData((int)(currentPos.x + gridUnitSize.x * posXnegaY), (int)(currentPos.z - gridUnitSize.z * posXnegaY), out BoardStatus st, out bool? ismovablePos))
+                    {
+                        Debug.Log($"Status of Board: ({(int)(currentPos.x + gridUnitSize.x * posXnegaY)},{(int)(currentPos.z - gridUnitSize.z * posXnegaY)}), st: {st}, bool: {ismovablePos} ");
+                        if ((st == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn)
+                         )
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x + gridUnitSize.x * posXnegaY), (int)(currentPos.z - gridUnitSize.z * posXnegaY)));
+                            break;
+                        }
+                        else if ((st == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn))
+                        {
+                            break;
+                        }
+                        else if (st == BoardStatus.Empty)
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x + gridUnitSize.x * posXnegaY), (int)(currentPos.z - gridUnitSize.z * posXnegaY)));
+                        }
+                    }
+                }
+                for (int negaXposY = 1; negaXposY < 9; negaXposY++)
+                {
+                    if (TryGetBoardData((int)(currentPos.x - gridUnitSize.x * negaXposY), (int)(currentPos.z + gridUnitSize.z * negaXposY), out BoardStatus st, out bool? ismovablePos))
+                    {
+                        Debug.Log($"Status of Board: ({(int)(currentPos.x - gridUnitSize.x * negaXposY)},{(int)(currentPos.z + gridUnitSize.z * negaXposY)}), st: {st}, bool: {ismovablePos} ");
+                        if (
+                          (st == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn
+                         )
+                         )
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x - gridUnitSize.x * negaXposY), (int)(currentPos.z + gridUnitSize.z * negaXposY)));
+                            break;
+                        }
+                        else if (
+                          (st == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn))
+                        {
+                            break;
+                        }
+                        else if (st == BoardStatus.Empty)
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x + -gridUnitSize.x * negaXposY), (int)(currentPos.z + gridUnitSize.z * negaXposY)));
+                        }
+                    }
+                }
+                for (int negaXnegaY = -1; negaXnegaY > -9; negaXnegaY--)
+                {
+                    if (TryGetBoardData((int)(currentPos.x + gridUnitSize.x * negaXnegaY), (int)(currentPos.z + gridUnitSize.z * negaXnegaY), out BoardStatus st, out bool? ismovablePos))
+                    {
+                        Debug.Log($"Status of Board: ({(int)(currentPos.x + gridUnitSize.x * negaXnegaY)},{(int)(currentPos.z + gridUnitSize.z * negaXnegaY)}), st: {st}, bool: {ismovablePos} ");
+                        if ((st == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn)
+                         )
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x + gridUnitSize.x * negaXnegaY), (int)(currentPos.z + gridUnitSize.z * negaXnegaY)));
+                            break;
+                        }
+                        else if ((st == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn))
+                        {
+                            break;
+                        }
+                        else if (st == BoardStatus.Empty)
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x + gridUnitSize.x * negaXnegaY), (int)(currentPos.z + gridUnitSize.z * negaXnegaY)));
+                        }
+                    }
+                }
+                List<(int x, int y)> movableKeysOld = boardDataBank
+              .Where(entry => entry.Value.isMovablePos == true)
+              .Select(entry => entry.Key)
+              .ToList();
+                foreach ((int x, int y) pos in movableKeysOld)
+                {
+                    if (TryGetBoardData(pos.x, pos.y, out BoardStatus st, out bool? ismovablePos))
+                    {
+                        AddBoardData(pos.x, pos.y, st, false);
+                    }
+                }
+                foreach ((int x, int y) pos in movablePosOnBoard)
+                {
+                    if (TryGetBoardData(pos.x, pos.y, out BoardStatus st, out bool? ismovablePos))
+                    {
+                        AddBoardData(pos.x, pos.y, st, true);
+                    }
+                }
+            }
+            if (characterModelForTransfer.Role == Role.HishaId || characterModelForTransfer.Role == Role.NariHishaId)
+            {
+                for (int posX = 1; posX < 9; posX++)
+                {
+                    if (TryGetBoardData((int)(currentPos.x + gridUnitSize.x * posX), (int)currentPos.z, out BoardStatus st, out bool? ismovablePos))
+                    {
+                        Debug.Log($"Status of Board: ({(int)(currentPos.x + gridUnitSize.x * posX)},{(int)currentPos.z}), st: {st}, bool: {ismovablePos} ");
+                        if ((st == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn)
+                         )
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x + gridUnitSize.x * posX), (int)currentPos.z));
+                            break;
+                        }
+                        else if ((st == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn))
+                        {
+                            break;
+                        }
+                        else if (st == BoardStatus.Empty)
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x + gridUnitSize.x * posX), (int)currentPos.z));
+                        }
+                    }
+                }
+                for (int posY = 1; posY < 9; posY++)
+                {
+                    if (TryGetBoardData((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * posY), out BoardStatus st, out bool? ismovablePos))
+                    {
+                        Debug.Log($"Status of Board: ({(int)currentPos.x},{(int)(currentPos.z + gridUnitSize.z * posY)}), st: {st}, bool: {ismovablePos} ");
+                        if ((st == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn)
+                         )
+                        {
+                            movablePosOnBoard.Add(((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * posY)));
+                            break;
+                        }
+                        else if ((st == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn))
+                        {
+                            break;
+                        }
+                        else if (st == BoardStatus.Empty)
+                        {
+                            movablePosOnBoard.Add(((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * posY)));
+                        }
+                    }
+                }
+                for (int negaX = -1; negaX > -9; negaX--)
+                {
+                    if (TryGetBoardData((int)(currentPos.x + gridUnitSize.x * negaX), (int)currentPos.z, out BoardStatus st, out bool? ismovablePos))
+                    {
+                        Debug.Log($"Status of Board: ({(int)(currentPos.x + gridUnitSize.x * negaX)},{(int)currentPos.z}), st: {st}, bool: {ismovablePos} ");
+                        if (
+                          (st == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn
+                         )
+                         )
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x + gridUnitSize.x * negaX), (int)currentPos.z));
+                            break;
+                        }
+                        else if (
+                          (st == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn))
+                        {
+                            break;
+                        }
+                        else if (st == BoardStatus.Empty)
+                        {
+                            movablePosOnBoard.Add(((int)(currentPos.x + gridUnitSize.x * negaX), (int)currentPos.z));
+                        }
+                    }
+                }
+                for (int negaY = -1; negaY > -9; negaY--)
+                {
+                    if (TryGetBoardData((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * negaY), out BoardStatus st, out bool? ismovablePos))
+                    {
+                        Debug.Log($"Status of Board: ({(int)currentPos.x},{(int)(currentPos.z + gridUnitSize.z * negaY)}), st: {st}, bool: {ismovablePos} ");
+                        if ((st == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn)
+                         )
+                        {
+                            movablePosOnBoard.Add(((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * negaY)));
+                            break;
+                        }
+                        else if ((st == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn)
+                         || (st == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn))
+                        {
+                            break;
+                        }
+                        else if (st == BoardStatus.Empty)
+                        {
+                            movablePosOnBoard.Add(((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * negaY)));
+                        }
+                    }
+                }
+                List<(int x, int y)> movableKeysOld = boardDataBank
+              .Where(entry => entry.Value.isMovablePos == true)
+              .Select(entry => entry.Key)
+              .ToList();
+                foreach ((int x, int y) pos in movableKeysOld)
+                {
+                    if (TryGetBoardData(pos.x, pos.y, out BoardStatus st, out bool? ismovablePos))
+                    {
+                        AddBoardData(pos.x, pos.y, st, false);
+                    }
+                }
+                foreach ((int x, int y) pos in movablePosOnBoard)
+                {
+                    if (TryGetBoardData(pos.x, pos.y, out BoardStatus st, out bool? ismovablePos))
+                    {
+                        AddBoardData(pos.x, pos.y, st, true);
+                    }
+                }
+            }
+            if (characterModelForTransfer.Role == Role.KyoshaId)
+            {
+                if (!gameManager.IsMasterTurn)
+                {
+                    for (int posY = 1; posY < 9; posY++)
+                    {
+                        if (TryGetBoardData((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * posY), out BoardStatus st, out bool? ismovablePos))
+                        {
+                            Debug.Log($"Status of Board: ({(int)currentPos.x},{(int)(currentPos.z + gridUnitSize.z * posY)}), st: {st}, bool: {ismovablePos} ");
+                            if ((st == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
+                             || (st == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn)
+                             )
+                            {
+                                movablePosOnBoard.Add(((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * posY)));
+                                break;
+                            }
+                            else if ((st == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn)
+                             || (st == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn))
+                            {
+                                break;
+                            }
+                            else if (st == BoardStatus.Empty)
+                            {
+                                movablePosOnBoard.Add(((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * posY)));
+                            }
+                        }
+                    }
+                }
+                if (gameManager.IsMasterTurn)
+                {
+                    for (int posY = -1; posY > -9; posY--)
+                    {
+                        if (TryGetBoardData((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * posY), out BoardStatus st, out bool? ismovablePos))
+                        {
+                            Debug.Log($"Status of Board: ({(int)currentPos.x},{(int)(currentPos.z + gridUnitSize.z * posY)}), st: {st}, bool: {ismovablePos} ");
+                            if ((st == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)
+                             || (st == BoardStatus.MasterCharacterExist && !gameManager.IsMasterTurn)
+                             )
+                            {
+                                movablePosOnBoard.Add(((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * posY)));
+                                break;
+                            }
+                            else if ((st == BoardStatus.ClientCharacterExist && !gameManager.IsMasterTurn)
+                             || (st == BoardStatus.MasterCharacterExist && gameManager.IsMasterTurn))
+                            {
+                                break;
+                            }
+                            else if (st == BoardStatus.Empty)
+                            {
+                                movablePosOnBoard.Add(((int)currentPos.x, (int)(currentPos.z + gridUnitSize.z * posY)));
+                            }
+                        }
+                    }
+                }
+                List<(int x, int y)> movableKeysOld = boardDataBank
+              .Where(entry => entry.Value.isMovablePos == true)
+              .Select(entry => entry.Key)
+              .ToList();
+                foreach ((int x, int y) pos in movableKeysOld)
+                {
+                    if (TryGetBoardData(pos.x, pos.y, out BoardStatus st, out bool? ismovablePos))
+                    {
+                        AddBoardData(pos.x, pos.y, st, false);
+                    }
+                }
+                foreach ((int x, int y) pos in movablePosOnBoard)
+                {
+                    if (TryGetBoardData(pos.x, pos.y, out BoardStatus st, out bool? ismovablePos))
+                    {
+                        AddBoardData(pos.x, pos.y, st, true);
                     }
                 }
             }
@@ -172,8 +491,6 @@ public class BoardManager : MonoBehaviour
             Debug.Log("Color target movableKey is" + movableKey);
             if (gridsPosDictionary.ContainsKey(movableKey))
             {
-                Debug.Log("gameManager.EntireTime: " + gameManager.EntireTime);
-
                 MovablePos.Add(movableKey);
                 Debug.Log("Call Grid's Change Color Method");
                 gridsPosDictionary[movableKey].GetComponent<BoardInfo>().ColorPos(false, true);
@@ -192,6 +509,18 @@ public class BoardManager : MonoBehaviour
             {
                 Debug.Log("Call Grid's Change Color Method for umbovable");
                 gridsPosDictionary[unmovableKey].GetComponent<BoardInfo>().ColorPos(false, false);
+            }
+        }
+    }
+
+    private void ResetAllGridAsMovableIsFalse()
+    {
+        foreach (((int x, int y), GameObject obj) in gridsPosDictionary)
+        {
+            Debug.Log("Call Grid's Change Color Method for umbovable");
+            if (TryGetBoardData(x, y, out BoardStatus st, out bool? ismovablePos))
+            {
+                AddBoardData(x, y, st, false);
             }
         }
     }

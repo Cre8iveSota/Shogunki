@@ -781,7 +781,7 @@ GameObject:
   - component: {fileID: 7473368837455963642}
   m_Layer: 7
   m_Name: Bushi-Hi
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -839,7 +839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 6
+  role: 0
 --- !u!65 &7360525737488115740
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -903,7 +903,7 @@ GameObject:
   - component: {fileID: 6759015197559603077}
   m_Layer: 7
   m_Name: Bushi-Fu8
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3596,7 +3596,7 @@ GameObject:
   - component: {fileID: 288349167420782443}
   m_Layer: 7
   m_Name: Bushi-Oh
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3654,7 +3654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 7
+  role: 0
 --- !u!65 &7348967447735499927
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3814,7 +3814,7 @@ GameObject:
   - component: {fileID: 8177533066742852555}
   m_Layer: 7
   m_Name: Bushi-Ke1
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3872,7 +3872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 2
+  role: 0
 --- !u!65 &5570121853766572655
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4947,7 +4947,7 @@ GameObject:
   - component: {fileID: 8312804613817325224}
   m_Layer: 7
   m_Name: Bushi-Fu7
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5297,7 +5297,7 @@ GameObject:
   - component: {fileID: 2475379643407916268}
   m_Layer: 7
   m_Name: Bushi-Ka
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5355,7 +5355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 5
+  role: 0
 --- !u!65 &538465545804940815
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5550,7 +5550,7 @@ GameObject:
   - component: {fileID: 8563237659622455005}
   m_Layer: 7
   m_Name: Bushi-Ky1
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5608,7 +5608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 1
+  role: 0
 --- !u!65 &8709240731028995778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6453,7 +6453,7 @@ GameObject:
   - component: {fileID: 4343611751605923668}
   m_Layer: 7
   m_Name: Bushi-Ky2
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6511,7 +6511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 1
+  role: 0
 --- !u!65 &2181835870159008653
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7251,7 +7251,7 @@ GameObject:
   - component: {fileID: 2840378148959591278}
   m_Layer: 7
   m_Name: Bushi-Fu4
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7915,7 +7915,7 @@ GameObject:
   - component: {fileID: 7404150497325078388}
   m_Layer: 7
   m_Name: Bushi-Fu6
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8037,7 +8037,7 @@ GameObject:
   - component: {fileID: 4361018904915430974}
   m_Layer: 7
   m_Name: Bushi-Ki1
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8095,7 +8095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 4
+  role: 0
 --- !u!65 &1827230141338502706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8159,7 +8159,7 @@ GameObject:
   - component: {fileID: 310615918939426169}
   m_Layer: 7
   m_Name: Bushi-Ke2
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8217,7 +8217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 2
+  role: 0
 --- !u!65 &5457595089915611179
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8811,7 +8811,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3392492492523274613}
   m_Layer: 0
-  m_Name: Character SeM
+  m_Name: Character SetM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8931,7 +8931,7 @@ GameObject:
   - component: {fileID: 2453163308625939310}
   m_Layer: 7
   m_Name: Bushi-Fu2
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11625,7 +11625,7 @@ GameObject:
   - component: {fileID: 7917600736459179195}
   m_Layer: 7
   m_Name: Bushi-Fu1
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13367,7 +13367,7 @@ GameObject:
   - component: {fileID: 4646387221034955140}
   m_Layer: 7
   m_Name: Bushi-Gi2
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13425,7 +13425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 3
+  role: 0
 --- !u!65 &4372314761931267162
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13940,7 +13940,7 @@ GameObject:
   - component: {fileID: 6222795663662458340}
   m_Layer: 7
   m_Name: Bushi-Ki2
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13998,7 +13998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 4
+  role: 0
 --- !u!65 &6530693831339613632
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20083,7 +20083,7 @@ GameObject:
   - component: {fileID: 9159296527927091100}
   m_Layer: 7
   m_Name: Bushi-Fu3
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21519,7 +21519,7 @@ GameObject:
   - component: {fileID: 898025943399667274}
   m_Layer: 7
   m_Name: Bushi-Fu9
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21967,7 +21967,7 @@ GameObject:
   - component: {fileID: 2587056072967102771}
   m_Layer: 7
   m_Name: Bushi-Fu5
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23812,7 +23812,7 @@ GameObject:
   - component: {fileID: 3098456929682121354}
   m_Layer: 7
   m_Name: Bushi-Gi1
-  m_TagString: ClientCharacter
+  m_TagString: MasterCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23870,7 +23870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 3
+  role: 0
 --- !u!65 &8378131111564562472
 BoxCollider:
   m_ObjectHideFlags: 0

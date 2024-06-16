@@ -15,28 +15,34 @@ public class BoardInfo : MonoBehaviour
     [SerializeField] private bool isCurrentPos;
     public bool IsCurrentPos { get { return isCurrentPos; } set { isCurrentPos = value; } }
     BoardManager boardManager;
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        boardManager = GameObject.FindGameObjectWithTag("BM").GetComponent<BoardManager>();
+        gameManager = GameObject.FindGameObjectWithTag("GM")?.GetComponent<GameManager>();
+        boardManager = GameObject.FindGameObjectWithTag("BM")?.GetComponent<BoardManager>();
 
-        boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.MasterCharacterExist, false);
+        // boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.Empty, false);
+        RegisterIntoBoardDataBank(gameManager.IsMasterTurn);
     }
 
     public void RegisterIntoBoardDataBank(bool isMasterTurn)
     {
+        // Once All grid is registered as empty
+        Debug.Log($"RegisterIntoBoardDataBank is working; Add BoardMasterDic as Client- x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.ClientCharacterExist}, isMovablePos : {null}");
+        boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.Empty, null);
         Collider[] colliders = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.localScale / 2, Quaternion.identity);
         foreach (var collider in colliders)
         {
             if (collider.gameObject.CompareTag("MasterCharacter"))
             {
-                Debug.Log($"RegisterIntoBoardDataBank is working; Add BoardMasterDic as Master  - x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.MasterCharacterExist}, isMovablePos :{false}");
+                Debug.Log($"RegisterIntoBoardDataBank is working; Add BoardMasterDic as Master  - x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.MasterCharacterExist}, isMovablePos :{!isMasterTurn}");
                 boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.MasterCharacterExist, !isMasterTurn);
             }
-            if (collider.gameObject.CompareTag("ClientCharacter"))
+            else if (collider.gameObject.CompareTag("ClientCharacter"))
             {
-                Debug.Log($"RegisterIntoBoardDataBank is working; Add BoardMasterDic as Client- x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.ClientCharacterExist}, isMovablePos : {false}");
+                Debug.Log($"RegisterIntoBoardDataBank is working; Add BoardMasterDic as Client- x: {(int)transform.position.x}, z: {(int)transform.position.z}, BoardStatus: {BoardStatus.ClientCharacterExist}, isMovablePos : {isMasterTurn}");
                 boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.ClientCharacterExist, isMasterTurn);
             }
         }
@@ -74,8 +80,8 @@ public class BoardInfo : MonoBehaviour
 
             if (boardManager.MovablePos != null && boardManager.MovablePos.Count > 0)
             {
-                Debug.Log("Color Change Black");
-                ColoringGrid(Color.black);
+                Debug.Log("Color Change yellow");
+                ColoringGrid(Color.yellow);
             }
             else
             {

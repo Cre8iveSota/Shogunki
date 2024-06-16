@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -24,14 +25,6 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         boardManager = GameObject.FindGameObjectWithTag("BM").GetComponent<BoardManager>();
         Vector3 firstPos = transform.position;
         this.Id = FormatTwoDigit((int)role) + PositionToString2Digit(firstPos) + FormatFirstOwnerForId(HasMasterOwnership);
-    }
-    void Update()
-    {
-        // Todo: If I have a afford to fix here, move this ColorPos() from Update Method. This is because, it does not have meaning to call every seconds.
-        if (boardManager.CurrentPos != currentPos)
-        {
-            boardInfo.ColorPos(false, false);
-        }
     }
 
     #region Create Id Methods
@@ -94,34 +87,36 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
 
     public (int x, int y)[]? RangeOfMovementAsRole()
     {
+        int directionFactor = hasMasterOwnership ? -1 : 1;
+        Debug.Log($"RangeOfMovementAsRole is called as :{this.role}");
         switch (this.role)
         {
             case Role.HoheiId:
-                return new[] { (0, 1) };
+                return new[] { (0, 1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.KyoshaId:
-                return new[] { (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9) };
+                return new[] { (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.KeumaId:
-                return new[] { (1, 2), (-1, 2), (2, 1), (2, -1), (1, -2), (-1, -2), (-2, -1), (-2, 1) };
+                return new[] { (1, 2), (-1, 2) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.GinshoId:
-                return new[] { (-1, 1), (0, 1), (1, 1), (1, -1), (-1, -1) };
+                return new[] { (-1, 1), (0, 1), (1, 1), (1, -1), (-1, -1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.KiinshoId:
-                return new[] { (-1, 1), (0, 1), (1, 1), (-1, 0), (1, 0), (0, -1) };
+                return new[] { (-1, 1), (0, 1), (1, 1), (-1, 0), (1, 0), (0, -1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.KakugyoId:
                 return new[] {
                      (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9)
                     ,(-1, 1), (-2, 2), (-3, 3), (-4, 4), (-5, 5), (-6, 6), (-7, 7), (-8, 8), (-9, 9)
                     ,(-1, -1), (-2, -2), (-3, -3), (-4, -4), (-5, -5), (-6, -6), (-7, -7), (-8, -8), (-9, -9)
                     ,(1, -1), (2, -2), (3, -3), (4, -4), (5, -5), (6, -6), (7, -7), (8, -8), (9, -9)
-                };
+                }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.HishaId:
                 return new[] {
                      (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9)
                     ,(1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0)
                     ,(0, -1), (0, -2), (0, -3), (0, -4), (0, -5), (0, -6), (0, -7), (0, -8), (0, -9)
                     ,(-1, 0), (-2, 0), (-3, 0), (-4, 0), (-5, 0), (-6, 0), (-7, 0), (-8, 0), (-9, 0)
-                };
+                }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.OhId:
-                return new[] { (0, -1), (0, 1), (1, 1), (-1, 0), (1, 0), (-1, -1), (-1, 0), (1, -1) };
+                return new[] { (0, -1), (0, 1), (1, 1), (-1, 0), (1, 0), (-1, -1), (-1, 1), (1, -1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.NariKakuId:
                 return new[] {
                      (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9)
@@ -129,7 +124,7 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
                     ,(-1, -1), (-2, -2), (-3, -3), (-4, -4), (-5, -5), (-6, -6), (-7, -7), (-8, -8), (-9, -9)
                     ,(1, -1), (2, -2), (3, -3), (4, -4), (5, -5), (6, -6), (7, -7), (8, -8), (9, -9)
                     ,(0, -1), (0, 1), (1, 1), (-1, 0), (1, 0), (-1, -1), (-1, 0), (1, -1)
-                };
+                }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.NariHishaId:
                 return new[] {
                      (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9)
@@ -137,9 +132,9 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
                     ,(0, -1), (0, -2), (0, -3), (0, -4), (0, -5), (0, -6), (0, -7), (0, -8), (0, -9)
                     ,(-1, 0), (-2, 0), (-3, 0), (-4, 0), (-5, 0), (-6, 0), (-7, 0), (-8, 0), (-9, 0)
                     ,(0, -1), (0, 1), (1, 1), (-1, 0), (1, 0), (-1, -1), (-1, 0), (1, -1)
-                };
+                }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.NarikinId:
-                return new[] { (-1, 1), (0, 1), (1, 1), (-1, 0), (1, 0), (0, -1) };
+                return new[] { (-1, 1), (0, 1), (1, 1), (-1, 0), (1, 0), (0, -1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
         }
         return null;
     }

@@ -19,11 +19,31 @@ public class BoardManager : MonoBehaviour
             lastPos = currentPos;
             currentPos = value;
             Debug.Log($"current mouse Pos: {currentPos}");
+            foreach (((int x, int y), GameObject obj) in gridsPosDictionary)
+            {
+                obj.GetComponent<BoardInfo>().RegisterIntoBoardDataBank(!gameManager.IsMasterTurn); // use next turn
+            }
         }
     }
     private List<(int x, int y)> movablePos = new List<(int x, int y)>();
     public List<(int x, int y)> MovablePos { get { return movablePos; } set { movablePos = value; Debug.Log($"movable mouse Pos: {movablePos}"); } }
     public List<(int, int)> pastMovablePos = new List<(int x, int y)>();
+    private (int x, int y) expectedMovingPos;
+    public (int x, int y) ExpectedMovingPos
+    {
+        get { return expectedMovingPos; }
+        set
+        {
+            expectedMovingPos = value;
+            characterModelForTransfer.Move(expectedMovingPos.x, expectedMovingPos.y);
+            ResetAllGridAsMovableIsFalse();
+            CallChangeColorMovablePos();
+            foreach (((int x, int y), GameObject obj) in gridsPosDictionary)
+            {
+                obj.GetComponent<BoardInfo>().RegisterIntoBoardDataBank(!gameManager.IsMasterTurn); // use next turn
+            }
+        }
+    }
     private Dictionary<(int x, int y), (BoardStatus, bool? isMovablePos)> boardDataBank = new Dictionary<(int x, int y), (BoardStatus, bool? isMovablePos)>(); // if isMovablePos == null, which means depends on your Chara or not
     public IReadOnlyDictionary<(int x, int y), (BoardStatus, bool? isMovablePos)> BoardDataBank => boardDataBank;
     private GameManager gameManager;
@@ -101,9 +121,9 @@ public class BoardManager : MonoBehaviour
     }
     public bool TryGetBoardData(int x, int y, out BoardStatus status, out bool? isMovablePos)
     {
-        Debug.Log($"TrayBoardData search pos data- x: {x}, y: {y}");
         if (boardDataBank.TryGetValue((x, y), out var value))
         {
+            Debug.Log($"TrayBoardData search pos data- x: {x}, y: {y}, status: {value.Item1}, isMovablePos: {value.isMovablePos}");
             status = value.Item1; // I am not sure but for some reason made me use value.Item1 instead of value.status. Now, "value.Item1" is working as what I hoped, so I am leaving this problem
             isMovablePos = value.isMovablePos;
             Debug.Log("TrayBoardData return true");
@@ -111,7 +131,7 @@ public class BoardManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("TryGetBoardData return false");
+            Debug.Log($"TrayBoardData search pos data- x: {x}, y: {y}, but TryGetBoardData return false");
             status = default;
             isMovablePos = default;
             return false;
@@ -138,8 +158,7 @@ public class BoardManager : MonoBehaviour
                 Debug.Log($"Movable position: ({movablePosX}, {movablePosY})");
                 if (TryGetBoardData(movablePosX, movablePosY, out BoardStatus status, out bool? isMovable))
                 {
-                    Debug.Log("status :" + status);
-                    Debug.Log($"BoardDataBank data show before checking status- x: {movablePosX} - y: {movablePosY}");
+                    Debug.Log($"BoardDataBank data show before checking status- x: {movablePosX} - y: {movablePosY}, status: {status}, isMovable: {isMovable}");
                     if (
                         status == BoardStatus.Empty
                     || (status == BoardStatus.ClientCharacterExist && gameManager.IsMasterTurn)

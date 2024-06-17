@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private bool isMasterTurn;
+    [SerializeField] private bool isMasterTurn;
     public bool IsMasterTurn { get { return isMasterTurn; } set { isMasterTurn = value; } }
     private float timeCnt = 0;
     private int entireTime;

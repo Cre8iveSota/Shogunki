@@ -141,7 +141,7 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
 
     public void Move(int x, int y)
     {
-        transform.position = new Vector3(x, 0, y);
+        transform.position = new Vector3(x, 0.1f, y);
         // Todo: Chnage the isTurnPlayerMoved true
         Debug.Log("Move method is still construction");
     }

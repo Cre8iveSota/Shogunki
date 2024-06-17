@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class BoardInfo : MonoBehaviour
+public class BoardInfo : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private bool isMasterTapped;
     public bool IsMasterTapped { get { return isMasterTapped; } set { isMasterTapped = value; } }
@@ -57,6 +58,8 @@ public class BoardInfo : MonoBehaviour
 
     public void ColorPos(bool isCurrentPos, bool isMovablePos, bool isMasterCharaTapped = false, bool isClientCharaTapped = false)
     {
+        this.isCurrentPos = isCurrentPos;
+        this.isMovablePos = isMovablePos;
         // Todo: before online mode, to check the player who toched screen is unnecessary; Instead, to detect somebody touch or not is necessary
         // So, this is fraft until creating online mode
         // isMasterCharaTapped = Input.GetMouseButton(0);
@@ -120,6 +123,28 @@ public class BoardInfo : MonoBehaviour
         {
             Debug.Log($"Remove BoardMasterDic x: {(int)transform.position.x}, y: {(int)transform.position.z}, z: {BoardStatus.MasterCharacterExist}");
             boardManager.RemoveBoardData((int)transform.position.x, (int)transform.position.z);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        print($"オブジェクト{name} ({eventData.pointerPress}) がクリックされたよ！");
+        if (isMovablePos)
+        {
+            GameObject obj = eventData.pointerCurrentRaycast.gameObject;
+            if (obj.GetComponent<BoardInfo>() != null)
+            {
+                Vector3 clickedCharaPos = obj.GetComponent<BoardInfo>().transform.position;
+                if (gameManager.IsMasterTurn)
+                {
+                    boardManager.AddBoardData((int)clickedCharaPos.x, (int)clickedCharaPos.z, BoardStatus.MasterCharacterExist, false);
+                }
+                else
+                {
+                    boardManager.AddBoardData((int)clickedCharaPos.x, (int)clickedCharaPos.z, BoardStatus.ClientCharacterExist, false);
+                }
+                boardManager.ExpectedMovingPos = ((int)clickedCharaPos.x, (int)clickedCharaPos.z);
+            }
         }
     }
 }

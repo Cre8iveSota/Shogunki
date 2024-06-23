@@ -113,3 +113,89 @@
     - ChangeGridInfo
       - OnTriggerEnter
         - if the GridSquare is hit Character, insert/update BoardInfo
+
+---
+
+### Implemention
+
+#### Start()
+
+- BoardManager.cs
+  - Add all grid into gridsPosDictionary
+- gridsPosDictionary magage grid data: key x,y, value: GameObject
+
+- BoardInfo.cs
+  - RegisterIntoBoardDataBank()
+    - Each BoardInfo is registered into boardDataBannk: key x,y value: BoardStatus, isMovablePos?
+    - The flow of this method is :
+      - 1. All board are registerd as its position(x,y) with BoardStatus Empty and isMovable null
+      - 2. Using Physics.OverlapBox allow to judge which type of character is contacted the board
+      - 3. Depend on the type of character in 2. , baordDatabank will be updated like:
+        - if Master Character is contacted: Board Status and isMovablePos are gonna be MasterCharacterExist and false(!isMasterTurn), respectively.
+        - if Client Character is contacted: Board Status and isMovablePos are gonna be ClientCharacterExist and true(isMasterTurn), respectively.
+          - CAUTION: the reason board status's isMovablePos is gonna be true when there was Client Character is that the first turn is for Master player. So when it comes to Client Turn, the method "RegisterIntoBoardDataBank" should be called as for register as movablePos is false when it comes to there was client character on the board.
+
+#### The flow after the game start
+
+##### When Charater are touched
+
+- GameManager.cs
+
+  - Each player turn has time limit
+  - This file manage the following:
+    - time for each turn
+    - which player's turn
+
+- CharacterModel.cs
+
+  - currentPos is defined in OnTriggerStay()
+    - OnTriggerStay()
+      - if the character is touching any Grid:
+        - this.currentPos is defined as its Grid.transform.position
+        - this.boardInfo is defined as the Grid's BoardInfo Component
+  - When it comes to each player try for their action, the player needs to touch any character on the board.
+    - OnPointerClick()
+      - The method has the following role:
+        - register:
+          - boardManager.TouchedChara as for GameObject
+          - boardManager.CurrentPos = currentPos
+          - boardManager.CharacterModelForTransfer as for CharacterModel
+        - Color
+          - if the boardManager.CurrentPos equals to this.currentPos, its clored as the current pos color red
+
+- BoardManager.cs
+  - When this CurrentPos is updated:
+    - update lastPos by the past this.currentPos
+    - this.currentPos is updated by the currentPos data from CharacterModel
+  - Update All boardDataBank data
+    - get each grid info from gridsPosDictionary
+      - Call "RegisterIntoBoardDataBank()"
+        - this time, the movablePos is registered as diffrent turn player(!gameManager.IsMasterTurn) as default ?? what the hell it might mitake because I should register turn player(gameManager.IsMasterTurn)
+  - When this CharacterModelForTransfer is updated:
+    - Update All movablePos false by calling "ResetAllGridAsMovableIsFalse" in "CalculateMovablePos"
+      - in this case, CalculateMovablePos is called by one of the argument "isCurrent" false
+        - Due to this method is called as "isCurrent" false, the movablePos are calculated by lastPos which means the last touched characterPos
+    - characterModelForTransfer is updated by latest data
+    - CalculateMovablePos is called by one of the argument "isCurrent" true
+      - Hence, all movablePos are gonna be updated based on the latest CurrentPos
+    - As last, target grid are colored by "CallChangeColorMovablePos()"
+
+##### When mobanlePos are touched
+
+- BoardInfo.cs
+
+  - OnPointerClick()
+    - if this.isMovablePos is true
+      - Update the boardDataBank:
+        - the BoardStatus are changed as the turnPlayer Chara exist
+        - the movablePos is false
+    - boardManager.ExpectedMovingPos are inserted by its position
+
+- BoardManager.cs
+  - this.expectedMovingPos is updated by the new value from BoardInfo.cs
+  - check what charanter position is same as expectedPos and AttackingTarget is updated by expectedPos's characterModel
+  - this.characterModelForTransfer Move
+    - for move the character and delete the attackedCharacter
+  - ResetAllGridAsMovableIsFalse()
+  - CallChangeColorMovablePos
+  - Update all boardDataBank based on gridsPosDictionary

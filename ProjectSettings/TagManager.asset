@@ -9,6 +9,7 @@ TagManager:
   - ClientCharacter
   - Grid
   - GM
+  - RoleLetter
   layers:
   - Default
   - TransparentFX

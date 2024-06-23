@@ -205,6 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 0
 --- !u!65 &137655387328069519
 BoxCollider:
@@ -1858,6 +1859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 3
 --- !u!65 &9205935416588571065
 BoxCollider:
@@ -5076,6 +5078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 0
 --- !u!65 &2221891932520213004
 BoxCollider:
@@ -5455,6 +5458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 0
 --- !u!65 &6765737363063289162
 BoxCollider:
@@ -5705,6 +5709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 0
 --- !u!65 &411725573880157435
 BoxCollider:
@@ -6276,6 +6281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 0
 --- !u!65 &2562204689118798669
 BoxCollider:
@@ -7772,6 +7778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 6
 --- !u!65 &7905315212735019925
 BoxCollider:
@@ -9033,6 +9040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 0
 --- !u!65 &1501931493741456528
 BoxCollider:
@@ -10233,6 +10241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 4
 --- !u!65 &8324458096613249121
 BoxCollider:
@@ -10419,6 +10428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 5
 --- !u!65 &5881218543695690098
 BoxCollider:
@@ -10667,6 +10677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 3
 --- !u!65 &1796822668756642859
 BoxCollider:
@@ -11014,6 +11025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 2
 --- !u!65 &4231899422730364076
 BoxCollider:
@@ -12045,6 +12057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 1
 --- !u!65 &4792831155658889779
 BoxCollider:
@@ -12107,7 +12120,7 @@ GameObject:
   - component: {fileID: 559106191103632909}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12338,6 +12351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 2
 --- !u!65 &6612752514574210420
 BoxCollider:
@@ -17160,6 +17174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 4
 --- !u!65 &151564667070126298
 BoxCollider:
@@ -17889,6 +17904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 0
 --- !u!65 &6061971404731768084
 BoxCollider:
@@ -18660,6 +18676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 0
 --- !u!65 &7815978108732653961
 BoxCollider:
@@ -21781,6 +21798,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 7
 --- !u!65 &4669451214716570620
 BoxCollider:
@@ -22350,6 +22368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 0
 --- !u!65 &808051358904589060
 BoxCollider:
@@ -22985,6 +23004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 0
+  isAlive: 0
   role: 1
 --- !u!65 &7459295010531983554
 BoxCollider:

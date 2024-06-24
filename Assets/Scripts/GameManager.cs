@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isMasterTurn;
     [SerializeField] private GameObject nari;
     [SerializeField] private TMP_Text senteTimer, goteTimer;
-    [SerializeField] private TMP_Text SenteMotigomaNum, GoteMotigomaNum;
     public bool IsMasterTurn { get { return isMasterTurn; } set { isMasterTurn = value; } }
     private float timeCnt = 0;
     private int entireTime;
@@ -71,10 +70,5 @@ public class GameManager : MonoBehaviour
         {
             nari.SetActive(false);
         }
-    }
-
-    public void UpdateMotigomaNum()
-    {
-        Debug.LogWarning("Not Implemented");
     }
 }

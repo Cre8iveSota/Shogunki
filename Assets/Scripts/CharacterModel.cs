@@ -23,12 +23,13 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
     GameManager gameManager;
     [SerializeField] private Role role;
     private TMP_Text roleLetter;
-    HandyMethods handyMethods;
+    private MotigomaManager motigomaManager;
     public Role Role { get { return role; } set { role = value; } }
     void Start()
     {
         boardManager = GameObject.FindGameObjectWithTag("BM").GetComponent<BoardManager>();
         gameManager = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
+        motigomaManager = GameObject.FindGameObjectWithTag("MM").GetComponent<MotigomaManager>();
         Vector3 firstPos = transform.position;
         this.Id = FormatTwoDigit((int)role) + PositionToString2Digit(firstPos) + FormatFirstOwnerForId(HasMasterOwnership);
         this.IsAlive = true;
@@ -203,6 +204,12 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
 
     private void DeleteAndChangeOwnership()
     {
+        motigomaManager.UpdateMotigomaTargetRole = boardManager.AttackingTarget.role;
+        motigomaManager.UpdateMotigoma(gameManager.IsMasterTurn);
+
+        if (gameManager.IsMasterTurn) motigomaManager.MasterMotigoma.Add(this);
+        else motigomaManager.ClientMotigoma.Add(this);
+
         boardManager.AttackingTarget.IsAlive = false;
         boardManager.AttackingTarget.HasMasterOwnership = gameManager.IsMasterTurn;
         boardManager.AttackingTarget.gameObject.tag = gameManager.IsMasterTurn ? "MasterCharacter" : "ClientCharacter";

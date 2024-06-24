@@ -10,6 +10,7 @@ TagManager:
   - Grid
   - GM
   - RoleLetter
+  - MM
   layers:
   - Default
   - TransparentFX

@@ -681,4 +681,21 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
+
+    public List<GameObject> GetEmptyCoordinate()
+    {
+        List<GameObject> emptyGrids = new List<GameObject>();
+        foreach (var item in gridsPosDictionary)
+        {
+            gridsPosDictionary[item.Key].GetComponent<BoardInfo>().ColorPos(false, false);
+            if (TryGetBoardData(item.Key.x, item.Key.y, out BoardStatus status, out bool? isMovable))
+            {
+                if (status == BoardStatus.Empty)
+                {
+                    emptyGrids.Add(item.Value);
+                }
+            }
+        }
+        return emptyGrids;
+    }
 }

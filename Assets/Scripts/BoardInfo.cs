@@ -17,12 +17,14 @@ public class BoardInfo : MonoBehaviour, IPointerClickHandler
     public bool IsCurrentPos { get { return isCurrentPos; } set { isCurrentPos = value; } }
     BoardManager boardManager;
     GameManager gameManager;
+    MotigomaManager motigomaManager;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GM")?.GetComponent<GameManager>();
         boardManager = GameObject.FindGameObjectWithTag("BM")?.GetComponent<BoardManager>();
+        motigomaManager = GameObject.FindGameObjectWithTag("MM")?.GetComponent<MotigomaManager>();
 
         // boardManager.AddBoardData((int)transform.position.x, (int)transform.position.z, BoardStatus.Empty, false);
         RegisterIntoBoardDataBank(gameManager.IsMasterTurn);
@@ -51,7 +53,7 @@ public class BoardInfo : MonoBehaviour, IPointerClickHandler
 
     // Update is called once per frame
 
-    private void ColoringGrid(Color color)
+    public void ColoringGrid(Color color)
     {
         GetComponent<Renderer>().material.SetColor("_Color", color);
     }
@@ -129,7 +131,16 @@ public class BoardInfo : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         print($"オブジェクト{name} ({eventData.pointerPress}) がクリックされたよ！");
-        if (isMovablePos)
+        if (motigomaManager.IsUsingMotigoma)
+        {
+            Renderer renderer = GetComponent<Renderer>();
+            Color color = renderer.material.GetColor("_Color");
+            if (color == Color.green)
+            {
+                motigomaManager.PutMotigoma(gameManager.IsMasterTurn, (int)this.transform.position.x, (int)this.transform.position.z);
+            }
+        }
+        else if (isMovablePos)
         {
             GameObject obj = eventData.pointerCurrentRaycast.gameObject;
             if (obj.GetComponent<BoardInfo>() != null)

@@ -206,14 +206,12 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
     {
         motigomaManager.UpdateMotigomaTargetRole = boardManager.AttackingTarget.role;
         motigomaManager.UpdateMotigoma(gameManager.IsMasterTurn);
-
-        if (gameManager.IsMasterTurn) motigomaManager.MasterMotigoma.Add(this);
-        else motigomaManager.ClientMotigoma.Add(this);
+        motigomaManager.AttackedCharacter = boardManager.AttackingTarget;
 
         boardManager.AttackingTarget.IsAlive = false;
         boardManager.AttackingTarget.HasMasterOwnership = gameManager.IsMasterTurn;
         boardManager.AttackingTarget.gameObject.tag = gameManager.IsMasterTurn ? "MasterCharacter" : "ClientCharacter";
-        boardManager.AttackingTarget.gameObject.SetActive(false);
+        boardManager.AttackingTarget.gameObject.transform.position = Vector3.up * 100;
     }
 
 
@@ -229,6 +227,8 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         boardManager.CurrentPos = currentPos;
         boardManager.CharacterModelForTransfer = GetComponent<CharacterModel>();
         if (boardManager.CurrentPos == currentPos) { boardInfo.ColorPos(true, false); }
+        // IsAliveMotigomaがtrueのときに持ち駒を使えるようにしているため、盤上のキャラクターをタッチされた場合は持ち駒を使用していない状況と判断するためfalseにする
+        motigomaManager.IsUsingMotigoma = false;
     }
     private void OnTriggerStay(Collider other)
     {

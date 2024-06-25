@@ -788,7 +788,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 189002402}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaMaster
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &189002402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,8 +821,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1252,7 +1264,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 227557436}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaMaster
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &227557436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,8 +1297,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1640,7 +1664,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 353982515}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaMaster
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &353982515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1661,8 +1697,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1782,8 +1818,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3056,7 +3092,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 834196509}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaMaster
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &834196509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3077,8 +3125,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3935,7 +3983,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1080281575}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaMaster
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1080281575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3956,8 +4016,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4077,8 +4137,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4692,8 +4752,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5090,8 +5150,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5958,6 +6018,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1765682433}
   - component: {fileID: 1765682432}
+  - component: {fileID: 1765682434}
   m_Layer: 0
   m_Name: Motigoma Manager
   m_TagString: MM
@@ -5984,6 +6045,13 @@ MonoBehaviour:
   motigomaMasterKinshoText: {fileID: 1680144262}
   motigomaMasterKakugyoText: {fileID: 2091879237}
   motigomaMasterHishaText: {fileID: 1875491451}
+  motigomaMasterHohei: 0
+  motigomaMasterKyosha: 0
+  motigomaMasterKeuma: 0
+  motigomaMasterGinsho: 0
+  motigomaMasterKinsho: 0
+  motigomaMasterKakugyo: 0
+  motigomaMasterHisha: 0
   motigomaClientHoheiText: {fileID: 211855264}
   motigomaClientKyoshaText: {fileID: 1245525115}
   motigomaClientKeumaText: {fileID: 75077635}
@@ -5991,8 +6059,17 @@ MonoBehaviour:
   motigomaClientKinshoText: {fileID: 683513149}
   motigomaClientKakugyoText: {fileID: 668299824}
   motigomaClientHishaText: {fileID: 38495435}
+  motigomaClientHohei: 0
+  motigomaClientKyosha: 0
+  motigomaClientKeuma: 0
+  motigomaClientGinsho: 0
+  motigomaClientKinsho: 0
+  motigomaClientKakugyo: 0
+  motigomaClientHisha: 0
   senteMotigomaList: {fileID: 582125736}
   goteteMotigomaList: {fileID: 913055901}
+  summonTargetMotigomaMaster: {fileID: 0}
+  summonTargetMotigomaClient: {fileID: 0}
 --- !u!4 &1765682433
 Transform:
   m_ObjectHideFlags: 0
@@ -6008,6 +6085,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1765682434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765682431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99f6d357d823b4e5ba79f2f38a78811d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterMotigomaButton:
+  - {fileID: 227557435}
+  - {fileID: 834196508}
+  - {fileID: 189002401}
+  - {fileID: 1985129396}
+  - {fileID: 353982514}
+  - {fileID: 1850909118}
+  - {fileID: 1080281574}
+  clientMotigomaButton:
+  - {fileID: 366035108}
+  - {fileID: 1154582167}
+  - {fileID: 1956490936}
+  - {fileID: 1084873060}
+  - {fileID: 1929409180}
+  - {fileID: 1904859889}
+  - {fileID: 1195611316}
 --- !u!1 &1843407210
 GameObject:
   m_ObjectHideFlags: 0
@@ -6224,7 +6329,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1850909119}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaMaster
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1850909119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6245,8 +6362,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6500,8 +6617,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6621,8 +6738,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6876,8 +6993,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7085,7 +7202,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1985129397}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaMaster
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1985129397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7106,8 +7235,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 291f743e89857474e90af058c92eaee8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

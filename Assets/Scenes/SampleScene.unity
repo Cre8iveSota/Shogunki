@@ -704,6 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMasterTurn: 0
   nari: {fileID: 792160904}
+  nariPanel: {fileID: 226339360}
   senteTimerText: {fileID: 431611035}
   goteTimerText: {fileID: 1566612367}
   senteTimerNum: {fileID: 104627641}

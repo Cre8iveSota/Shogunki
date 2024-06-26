@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
             senteTimerNum.text = $"{(int)(senteTimeLimit - timeCntTurn) / 60:0}:{(senteTimeLimit - timeCntTurn) % 60:00}";
             if (senteTimeLimit - timeCntTurn <= 0)
             {
+                CloseNariWindow();
                 TurnChange(isMasterTurn);
             }
         }
@@ -116,8 +117,19 @@ public class GameManager : MonoBehaviour
             goteTimerNum.text = $"{(int)(goteTimeLimit - timeCntTurn) / 60:0}:{(goteTimeLimit - timeCntTurn) % 60:00}";
             if (goteTimeLimit - timeCntTurn <= 0)
             {
+                CloseNariWindow();
                 TurnChange(isMasterTurn);
             }
+        }
+    }
+
+    private void CloseNariWindow()
+    {
+        if (isCallingNari)
+        {
+            IsCallingNari = false;
+            nariPanel.GetComponent<Image>().raycastTarget = false;
+            nariPanel.GetComponent<Image>().color = new Color(255, 255, 255, 0);
         }
     }
 

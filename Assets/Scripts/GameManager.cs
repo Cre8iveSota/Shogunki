@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool isMasterTurn;
-    [SerializeField] private GameObject nari;
+    [SerializeField] private GameObject nari, nariPanel;
     [SerializeField] private TMP_Text senteTimerText, goteTimerText;
     [SerializeField] private TMP_Text senteTimerNum, goteTimerNum;
     public bool IsMasterTurn { get { return isMasterTurn; } set { isMasterTurn = value; } }
@@ -57,6 +58,9 @@ public class GameManager : MonoBehaviour
             return;
         }
         nari.SetActive(true);
+        nariPanel.GetComponent<Image>().raycastTarget = true;
+        nariPanel.GetComponent<Image>().color = new Color(255, 255, 255, 180f / 255f);
+
         targetNari = chara;
 
         // TODO: after press buttom deactivate it
@@ -93,6 +97,8 @@ public class GameManager : MonoBehaviour
         }
         TurnChange(isMasterTurn);
         isCallingNari = false;
+        nariPanel.GetComponent<Image>().raycastTarget = false;
+        nariPanel.GetComponent<Image>().color = new Color(255, 255, 255, 0);
     }
 
     private void CountDownTimer(bool isMaster)

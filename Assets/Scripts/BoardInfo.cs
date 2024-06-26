@@ -141,7 +141,7 @@ public class BoardInfo : MonoBehaviour, IPointerClickHandler
                 gameManager.TurnChange(gameManager.IsMasterTurn);
             }
         }
-        else if (isMovablePos && boardManager.TouchedChara != null &&
+        else if (isMovablePos && boardManager != null && boardManager.TouchedChara != null &&
         (boardManager.TouchedChara.GetComponent<CharacterModel>().HasMasterOwnership == gameManager.IsMasterTurn)
         || (!boardManager.TouchedChara.GetComponent<CharacterModel>().HasMasterOwnership == !gameManager.IsMasterTurn))
         {

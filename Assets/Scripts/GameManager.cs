@@ -106,10 +106,18 @@ public class GameManager : MonoBehaviour
         if (isMaster)
         {
             senteTimerNum.text = $"{(int)(senteTimeLimit - timeCntTurn) / 60:0}:{(senteTimeLimit - timeCntTurn) % 60:00}";
+            if (senteTimeLimit - timeCntTurn <= 0)
+            {
+                TurnChange(isMasterTurn);
+            }
         }
         else
         {
             goteTimerNum.text = $"{(int)(goteTimeLimit - timeCntTurn) / 60:0}:{(goteTimeLimit - timeCntTurn) % 60:00}";
+            if (goteTimeLimit - timeCntTurn <= 0)
+            {
+                TurnChange(isMasterTurn);
+            }
         }
     }
 

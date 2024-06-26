@@ -138,9 +138,12 @@ public class BoardInfo : MonoBehaviour, IPointerClickHandler
             if (color == Color.green)
             {
                 motigomaManager.PutMotigoma(gameManager.IsMasterTurn, (int)this.transform.position.x, (int)this.transform.position.z);
+                gameManager.TurnChange(gameManager.IsMasterTurn);
             }
         }
-        else if (isMovablePos)
+        else if (isMovablePos && boardManager.TouchedChara != null &&
+        (boardManager.TouchedChara.GetComponent<CharacterModel>().HasMasterOwnership == gameManager.IsMasterTurn)
+        || (!boardManager.TouchedChara.GetComponent<CharacterModel>().HasMasterOwnership == !gameManager.IsMasterTurn))
         {
             GameObject obj = eventData.pointerCurrentRaycast.gameObject;
             if (obj.GetComponent<BoardInfo>() != null)

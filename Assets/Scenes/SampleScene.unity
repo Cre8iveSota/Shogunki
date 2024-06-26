@@ -704,8 +704,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMasterTurn: 0
   nari: {fileID: 792160904}
-  senteTimer: {fileID: 104627641}
-  goteTimer: {fileID: 859214576}
+  senteTimerText: {fileID: 431611035}
+  goteTimerText: {fileID: 1566612367}
+  senteTimerNum: {fileID: 104627641}
+  goteTimerNum: {fileID: 859214576}
+  senteTimeLimit: 0
+  goteTimeLimit: 0
 --- !u!1 &189002399
 GameObject:
   m_ObjectHideFlags: 0

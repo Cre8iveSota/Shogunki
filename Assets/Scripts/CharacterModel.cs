@@ -170,22 +170,12 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
     public void Move(int x, int y)
     {
         // 移動前に成ポジションにいたら成を呼ぶ
-        if ((this.HasMasterOwnership == gameManager.IsMasterTurn && this.GetCurrentPos().y <= -4)
-        || (this.HasMasterOwnership == !gameManager.IsMasterTurn && this.GetCurrentPos().y >= 4)
-        )
-        {
-            gameManager.CallNari(this);
-        }
+        NariEnableCheck();
 
         transform.position = new Vector3(x, 0.1f, y);
 
         // 移動後に成ポジションにいたら成を呼ぶ
-        if ((this.HasMasterOwnership == gameManager.IsMasterTurn && this.GetCurrentPos().y <= -4)
-        || (this.HasMasterOwnership == !gameManager.IsMasterTurn && this.GetCurrentPos().y >= 4)
-        )
-        {
-            gameManager.CallNari(this);
-        }
+        NariEnableCheck();
 
         // Check there is oppornent
         if (boardManager.AttackingTarget != null) Attack();
@@ -193,7 +183,25 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         // true: Attack and Delete and Change
         // Todo: Chnage the isTurnPlayerMoved true
 
+        if (!gameManager.IsCallingNari) gameManager.TurnChange(gameManager.IsMasterTurn);
+
         Debug.Log("Move method is still construction");
+    }
+
+    private void NariEnableCheck()
+    {
+        if (this.role == Role.NarikinId
+        || this.role == Role.NariKakuId
+        || this.role == Role.NariHishaId
+        ) return;
+
+        if ((this.HasMasterOwnership && gameManager.IsMasterTurn && this.GetCurrentPos().y <= -4)
+        || (!this.HasMasterOwnership && !gameManager.IsMasterTurn && this.GetCurrentPos().y >= 4)
+        )
+        {
+            gameManager.CallNari(this);
+            gameManager.IsCallingNari = true;
+        }
     }
 
     private void Attack()

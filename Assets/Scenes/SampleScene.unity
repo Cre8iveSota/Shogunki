@@ -1802,7 +1802,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 366035109}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &366035109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4121,7 +4133,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1084873061}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1084873061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4736,7 +4760,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1154582168}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1154582168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5134,7 +5170,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1195611317}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1195611317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6601,7 +6649,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1904859890}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1904859890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6722,7 +6782,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1929409181}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1929409181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6977,7 +7049,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1956490937}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1765682432}
+        m_TargetAssemblyTypeName: MotigomaManager, Assembly-CSharp
+        m_MethodName: UseMotigomaClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1956490937
 MonoBehaviour:
   m_ObjectHideFlags: 0

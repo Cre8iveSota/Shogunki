@@ -33,7 +33,7 @@ public class MotigomaButtonDisplayController : MonoBehaviour
         else { masterMotigomaButton[6].interactable = true; }
 
         if (motigomaManager.motigomaClientHohei == 0) { clientMotigomaButton[0].interactable = false; }
-        else { masterMotigomaButton[0].interactable = true; }
+        else { clientMotigomaButton[0].interactable = true; }
         if (motigomaManager.motigomaClientKyosha == 0) { clientMotigomaButton[1].interactable = false; }
         else { clientMotigomaButton[1].interactable = true; }
         if (motigomaManager.motigomaClientKeuma == 0) { clientMotigomaButton[2].interactable = false; }

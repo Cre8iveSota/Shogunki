@@ -219,7 +219,7 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         boardManager.AttackingTarget.IsAlive = false;
         boardManager.AttackingTarget.HasMasterOwnership = gameManager.IsMasterTurn;
         boardManager.AttackingTarget.gameObject.tag = gameManager.IsMasterTurn ? "MasterCharacter" : "ClientCharacter";
-        boardManager.AttackingTarget.gameObject.transform.position = Vector3.up * 100;
+        boardManager.AttackingTarget.gameObject.transform.position = Vector3.left * 100;
     }
 
 

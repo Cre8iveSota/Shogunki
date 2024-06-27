@@ -146,7 +146,7 @@ public class BoardInfo : MonoBehaviour, IPointerClickHandler
         || (!boardManager.TouchedChara.GetComponent<CharacterModel>().HasMasterOwnership == !gameManager.IsMasterTurn))
         {
             GameObject obj = eventData.pointerCurrentRaycast.gameObject;
-            if (obj.GetComponent<BoardInfo>() != null)
+            if (obj.GetComponent<BoardInfo>() != null && this.isMovablePos)
             {
                 Vector3 clickedCharaPos = obj.GetComponent<BoardInfo>().transform.position;
                 if (gameManager.IsMasterTurn)

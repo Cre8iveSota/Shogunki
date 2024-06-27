@@ -49,9 +49,7 @@ public class MotigomaManager : MonoBehaviour
         boardManager = GameObject.FindGameObjectWithTag("BM").GetComponent<BoardManager>();
         motigomaButtonDisplayController = GetComponent<MotigomaButtonDisplayController>();
 
-        // Initialize each motigoma list, master and client
-        UpdateMotigoma(true);
-        UpdateMotigoma(false);
+        ShowTheNumberOfMotigoma();
     }
     public void ShowMotigoma(bool isMaster)
     {

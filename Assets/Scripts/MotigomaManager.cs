@@ -102,6 +102,7 @@ public class MotigomaManager : MonoBehaviour
                 else motigomaClientKakugyo++;
                 break;
             case Role.HishaId:
+            case Role.NariHishaId:
                 if (isMaster) motigomaMasterHisha++;
                 else motigomaClientHisha++;
                 break;
@@ -164,7 +165,8 @@ public class MotigomaManager : MonoBehaviour
             Debug.Log($"Start InsertSummonTargetMotigoma as isMaster true, masterMotigoma Count: {masterMotigoma.Count}");
             foreach (CharacterModel charaModel in masterMotigoma)
             {
-                string roleString = (int)charaModel.Role > 9 ? ((int)charaModel.Role).ToString().Substring(1, 1) : ((int)charaModel.Role).ToString();
+                string roleString = charaModel.Id.Substring(0, 2);
+                charaModel.Role = (Role)int.Parse(roleString);
                 Debug.Log($"Role: {charaModel.Role}, roleString: {roleString}");
                 Debug.Log($"InsertSummonTargetMotigoma: masterMotigoma count: {masterMotigoma.Count}, charaModel.Role: {(int)charaModel.Role}, roleNum: {roleNum} ");
                 if ((int)charaModel.Role == roleNum)
@@ -180,7 +182,8 @@ public class MotigomaManager : MonoBehaviour
             Debug.Log($"Start InsertSummonTargetMotigoma as isMaster false, clientMotigoma Count: {clientMotigoma.Count}");
             foreach (CharacterModel charaModel in clientMotigoma)
             {
-                string roleString = (int)charaModel.Role > 9 ? ((int)charaModel.Role).ToString().Substring(1, 1) : ((int)charaModel.Role).ToString();
+                string roleString = charaModel.Id.Substring(0, 2);
+                charaModel.Role = (Role)int.Parse(roleString);
                 Debug.Log($"Role: {charaModel.Role}, roleString: {roleString}");
                 if (int.Parse(roleString) == roleNum)
                 {
@@ -265,6 +268,7 @@ public class MotigomaManager : MonoBehaviour
             {
                 summonTargetMotigomaMaster.transform.localRotation = Quaternion.Euler(0, 180, 0);
             }
+            summonTargetMotigomaMaster.Role = (Role)int.Parse(summonTargetMotigomaMaster.Id.Substring(0, 2));
             summonTargetMotigomaMaster.transform.position = new Vector3(gridPosX, 0.1f, gridPosZ);
             summonTargetMotigomaMaster.IsAlive = true;
             MasterMotigoma.Remove(summonTargetMotigomaMaster);
@@ -280,6 +284,7 @@ public class MotigomaManager : MonoBehaviour
             {
                 summonTargetMotigomaClient.transform.localRotation = Quaternion.Euler(0, 180, 0);
             }
+            summonTargetMotigomaClient.Role = (Role)int.Parse(summonTargetMotigomaClient.Id.Substring(0, 2));
             summonTargetMotigomaClient.transform.position = new Vector3(gridPosX, 0.1f, gridPosZ);
             summonTargetMotigomaClient.IsAlive = true;
             ClientMotigoma.Remove(summonTargetMotigomaClient);

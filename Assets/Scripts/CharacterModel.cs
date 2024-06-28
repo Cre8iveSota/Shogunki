@@ -32,7 +32,15 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Role role;
     private TMP_Text roleLetter;
     private MotigomaManager motigomaManager;
-    public Role Role { get { return role; } set { role = value; } }
+    public Role Role
+    {
+        get { return role; }
+        set
+        {
+            role = value;
+            RoleAbility();
+        }
+    }
     void Start()
     {
         boardManager = GameObject.FindGameObjectWithTag("BM").GetComponent<BoardManager>();
@@ -233,7 +241,7 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
 
     private void DeleteAndChangeOwnership()
     {
-        motigomaManager.UpdateMotigomaTargetRole = boardManager.AttackingTarget.role;
+        motigomaManager.UpdateMotigomaTargetRole = boardManager.AttackingTarget.role; //TODO なったひしゃ角が取られてマスターが使おうとしたとき使えない
         motigomaManager.UpdateMotigoma(gameManager.IsMasterTurn);
         motigomaManager.AttackedCharacter = boardManager.AttackingTarget;
 
@@ -245,7 +253,7 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         {
             boardManager.AttackingTarget.HasMasterOwnership = gameManager.IsMasterTurn;
             boardManager.AttackingTarget.gameObject.tag = gameManager.IsMasterTurn ? "MasterCharacter" : "ClientCharacter";
-            boardManager.AttackingTarget.gameObject.transform.position = new Vector3(boardManager.AttackingTarget.gameObject.transform.position.x * 100, 0f, 0);
+            boardManager.AttackingTarget.gameObject.transform.position = new Vector3(boardManager.AttackingTarget.gameObject.transform.position.x + 100, 0f, 0);
         }
     }
 

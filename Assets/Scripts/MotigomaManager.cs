@@ -264,12 +264,9 @@ public class MotigomaManager : MonoBehaviour
         if (isMaster)
         {
             Debug.Log($"Master SUMMON TARGET is +{summonTargetMotigomaMaster.name}");
-            if (summonTargetMotigomaMaster.Id.Substring(summonTargetMotigomaMaster.Id.Length - 1) == "1")
-            {
-                summonTargetMotigomaMaster.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
             summonTargetMotigomaMaster.Role = (Role)int.Parse(summonTargetMotigomaMaster.Id.Substring(0, 2));
             summonTargetMotigomaMaster.transform.position = new Vector3(gridPosX, 0.1f, gridPosZ);
+            summonTargetMotigomaMaster.gameObject.transform.rotation = summonTargetMotigomaMaster.Id.Substring(summonTargetMotigomaMaster.Id.Length - 1) == "0" ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
             summonTargetMotigomaMaster.IsAlive = true;
             MasterMotigoma.Remove(summonTargetMotigomaMaster);
             Debug.Log($"PutMotigoma isMaster true, masterMotigoma Count: {masterMotigoma.Count}");
@@ -280,13 +277,10 @@ public class MotigomaManager : MonoBehaviour
         {
             Debug.Log("Client SUMMON TARGET is +" + summonTargetMotigomaClient.Id);
             Debug.Log("ID last:" + summonTargetMotigomaClient.Id.Substring(summonTargetMotigomaClient.Id.Length - 1));
-            if (summonTargetMotigomaClient.Id.Substring(summonTargetMotigomaClient.Id.Length - 1) == "0")
-            {
-                summonTargetMotigomaClient.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
             summonTargetMotigomaClient.Role = (Role)int.Parse(summonTargetMotigomaClient.Id.Substring(0, 2));
             summonTargetMotigomaClient.transform.position = new Vector3(gridPosX, 0.1f, gridPosZ);
             summonTargetMotigomaClient.IsAlive = true;
+            summonTargetMotigomaClient.gameObject.transform.rotation = summonTargetMotigomaClient.Id.Substring(summonTargetMotigomaClient.Id.Length - 1) == "0" ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
             ClientMotigoma.Remove(summonTargetMotigomaClient);
             Debug.Log($"PutMotigoma isMaster true, clientMotigoma Count: {clientMotigoma.Count}");
             DecreaseMotigomaNum(isMaster, summonTargetMotigomaClient.Role);

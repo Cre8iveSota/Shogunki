@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class CharacterModel : MonoBehaviour, IPointerClickHandler
 {
@@ -41,11 +42,18 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
             RoleAbility();
         }
     }
+    Animator animator;
+    private bool hasCalledFunction = false;
+    private bool hasCalledFunction2 = false;
+
+
     void Start()
     {
         boardManager = GameObject.FindGameObjectWithTag("BM").GetComponent<BoardManager>();
         gameManager = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
         motigomaManager = GameObject.FindGameObjectWithTag("MM").GetComponent<MotigomaManager>();
+        animator = GetComponent<Animator>();
+
         Vector3 firstPos = transform.position;
         this.Id = FormatTwoDigit((int)role) + PositionToString2Digit(firstPos) + FormatFirstOwnerForId(HasMasterOwnership);
         this.IsAlive = true;
@@ -197,22 +205,59 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
 
     public void Move(int x, int y)
     {
+        hasCalledFunction = false;
+        hasCalledFunction2 = false;
+
+        animator.SetInteger("actionNum", 1);
         // 移動前に成ポジションにいたら成を呼ぶ
         NariEnableCheck();
 
-        transform.position = new Vector3(x, 0.1f, y);
+        transform.LookAt(new Vector3(x, 0.1f, y));
+        Tween moveTween = boardManager.TouchedChara.transform.DOMove(new Vector3(x, 0.1f, y), 1 + 0.2f * Vector3.Distance(boardManager.CurrentPos, new Vector3(x, 0.1f, y)));
+        moveTween.OnUpdate(() =>
+        {
+            float progress = moveTween.Elapsed() / (1 + 0.2f * Vector3.Distance(boardManager.CurrentPos, new Vector3(x, 0.1f, y)));
 
-        // 移動後に成ポジションにいたら成を呼ぶ
-        NariEnableCheck();
-
-        // Check there is oppornent
-        if (boardManager.AttackingTarget != null) { Attack(); Debug.Log("Attack chara:" + this.id); }
-
-        if (!gameManager.IsCallingNari) gameManager.TurnChange(gameManager.IsMasterTurn);
+            // 進行状況が80%に達したら関数を呼び出す
+            if (progress >= 0.5f && boardManager.AttackingTarget != null && !hasCalledFunction)
+            {
+                boardManager.TouchedChara.GetComponent<CharacterModel>().animator.SetInteger("actionNum", 2);
+                hasCalledFunction = true;
+            }
+            if (progress >= 0.8f && !hasCalledFunction2)
+            {
+                // Check there is oppornent
+                Attack();
+                hasCalledFunction2 = true;
+            }
+        }).OnComplete(() =>
+            {
+                animator.SetInteger("actionNum", 0);
+                transform.rotation = this.hasMasterOwnership ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+                // 移動後に成ポジションにいたら成を呼ぶ
+                NariEnableCheck();
+                if (!gameManager.IsCallingNari) gameManager.TurnChange(gameManager.IsMasterTurn);
+            }
+        );
 
         Debug.Log("Move method is still construction");
     }
 
+    private void Attack()
+    {
+        if (boardManager.AttackingTarget != null)
+        {
+            Debug.Log("Attack method is still construction");
+            DeleteAndChangeOwnership();
+            Debug.Log("Attack chara:" + this.id);
+        }
+    }
+
+    public void AnimationEventEndAttack()
+    {
+        animator.SetInteger("actionNum", 0);
+        Debug.Log("This id is + " + Id);
+    }
     private void NariEnableCheck()
     {
         if (
@@ -232,12 +277,6 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
             gameManager.CallNari(this);
             gameManager.IsCallingNari = true;
         }
-    }
-
-    private void Attack()
-    {
-        Debug.Log("Attack method is still construction");
-        DeleteAndChangeOwnership();
     }
 
     private void DeleteAndChangeOwnership()

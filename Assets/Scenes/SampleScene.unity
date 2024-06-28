@@ -1117,7 +1117,7 @@ Transform:
   m_GameObject: {fileID: 202744017}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9967579, z: -0.08045889, w: -1e-45}
-  m_LocalPosition: {x: 2, y: 1.3000001, z: 12}
+  m_LocalPosition: {x: 2, y: 2.1, z: 11.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4539,7 +4539,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9967579, z: -0.08045889, w: -1e-45}
-  m_LocalPosition: {x: 2, y: 1.3000001, z: 12}
+  m_LocalPosition: {x: 2, y: 2.1, z: 11.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5983,10 +5983,22 @@ PrefabInstance:
       propertyPath: role
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 382969548345855153, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 479256509382081999, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 1170627436593317166, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 1289661938980808674, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 1319169359137222925, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
@@ -6007,6 +6019,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 2068670664238253566, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 2212729781425467004, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -6015,14 +6031,22 @@ PrefabInstance:
       propertyPath: role
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2445320823590112769, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 2572178592791563719, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: role
-      value: 1
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2650075506808799476, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 2690257160694345373, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 3220851828465119726, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
@@ -6075,18 +6099,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3905997428503862890, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 4010816838921805721, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 4011793834243988060, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
     - target: {fileID: 4078195767985405470, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: role
-      value: 1
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4205473078950132785, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 4398989250963201138, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 4398989250972692416, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -6095,6 +6131,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4625556447748022692, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 4710061117813918152, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6
@@ -6107,6 +6147,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 5099858691079272131, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 5672975729906468284, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 5925667819696741711, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
@@ -6115,6 +6163,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 6132264051856216187, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 6294727652748824678, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
@@ -6131,6 +6183,14 @@ PrefabInstance:
       propertyPath: role
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6564958469070063919, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 6614314176077283506, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 6949127631972708409, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: role
       value: 3
@@ -6143,6 +6203,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 7189765116544988013, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 7329490435043613000, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
@@ -6151,6 +6215,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 7733864568768143043, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 7915265904510019168, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -6163,6 +6231,10 @@ PrefabInstance:
       propertyPath: role
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8307939704896556202, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 8319329578959670236, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
@@ -6175,10 +6247,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 8852353044438738258, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 8924794804421213246, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 9036993703318626991, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 9214599932524162991, guid: 236ab6e090096458aaa89765750f3ead, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -8581,7 +8661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1.2, z: -8}
+  m_FollowOffset: {x: 0, y: 2, z: -7.5}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -9955,22 +10035,74 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 141222696527860895, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: role
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 141554394407985044, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: role
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 188881070095479226, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 347876866956022593, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
+      objectReference: {fileID: 0}
+    - target: {fileID: 665792767780817692, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 987645469706800317, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 1266760284847599987, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: role
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379690732952579551, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: role
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1581811943529636435, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 1969548983747212148, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: role
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1979309695132739924, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 2026965815885929974, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 2055871868111358898, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: role
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064578079024775464, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 2165429409057300103, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 2457653891836442645, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2749704848637453536, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 2839584482954237499, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
@@ -9983,10 +10115,26 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 3865464898908228457, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 3904775531536035356, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 3950531673265635289, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 4030316717834661697, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 4212383116664637253, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 4804198481055192481, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
@@ -9995,9 +10143,33 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 4994100651535104454, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 5066875729200481689, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: role
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5095982602137121929, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: role
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389462554416298975, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: role
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5473975500980359295, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024484899536818453, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 6026041575336391576, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: role
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6050725143214443550, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
       propertyPath: m_TagString
@@ -10007,10 +10179,22 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 6141111681183613297, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 6360271424175730504, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
       objectReference: {fileID: 0}
+    - target: {fileID: 6483189552283636978, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 6669048943918175475, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     - target: {fileID: 7048945572893701726, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
       propertyPath: m_TagString
       value: RoleLetter
@@ -10079,6 +10263,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character SetC
       objectReference: {fileID: 0}
+    - target: {fileID: 8121451242174442747, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 8190527599150784534, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 8491661736495280451, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
+    - target: {fileID: 8534660409064009984, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: role
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582619291001087882, guid: 66816f3d97eb840d5b68d3d4db619ec0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

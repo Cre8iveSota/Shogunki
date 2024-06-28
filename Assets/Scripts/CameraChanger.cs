@@ -32,6 +32,7 @@ public class CameraChanger : MonoBehaviour
         {
             isTouchedCharaUpdated = value;
             _vc.Follow = boardManager.TouchedChara.transform;
+            _vc.LookAt = boardManager.TouchedChara.transform;
             isTouchedCharaUpdated = false;
         }
     }
@@ -79,14 +80,13 @@ public class CameraChanger : MonoBehaviour
         masterCommanderView.SetActive(false);
         clientCommanderView.SetActive(false);
         characterView.SetActive(true);
+        _vc.Follow = boardManager.TouchedChara.transform;
         if (gameManager.IsMasterTurn && cModelMater.IsAlive)
         {
-            _vc.Follow = masterKingAsForCharaViewDefault.transform;
             _vc.LookAt = clientKingAsForCharaViewDefault.transform;
         }
         else if (!gameManager.IsMasterTurn && cModelClient.IsAlive)
         {
-            _vc.Follow = clientKingAsForCharaViewDefault.transform;
             _vc.LookAt = masterKingAsForCharaViewDefault.transform;
         }
     }

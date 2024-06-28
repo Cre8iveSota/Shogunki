@@ -8,7 +8,15 @@ using UnityEngine;
 public class BoardManager : MonoBehaviour
 {
     private GameObject tochedChara;
-    public GameObject TouchedChara { get { return tochedChara; } set { tochedChara = value; Debug.Log($"changed touched chara: {value}"); } }
+    public GameObject TouchedChara
+    {
+        get { return tochedChara; }
+        set
+        {
+            tochedChara = value; Debug.Log($"changed touched chara: {value}");
+            cameraChanger.IsTouchedCharaUpdated = true;
+        }
+    }
     private Vector3 currentPos;
     private Vector3 lastPos;
     public Vector3 CurrentPos
@@ -35,6 +43,7 @@ public class BoardManager : MonoBehaviour
         set
         {
             expectedMovingPos = value;
+            cameraChanger.IsExpectedPosUpdated = true;
             Debug.Log($"Start finding the pos status of:({expectedMovingPos.x},{expectedMovingPos.y})");
             // check there is oppornent beofre chara move
             if (TryGetBoardData(expectedMovingPos.x, expectedMovingPos.y, out BoardStatus status, out bool? isMovablePos))
@@ -124,10 +133,12 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private Vector3 gridUnitSize = new Vector3(2, 0, 2);
     private GameObject[] grids;
     private Dictionary<(int x, int y), GameObject> gridsPosDictionary = new Dictionary<(int x, int y), GameObject>();
+    private CameraChanger cameraChanger;
 
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
+        cameraChanger = GameObject.FindGameObjectWithTag("CC").GetComponent<CameraChanger>();
         if (gameManager == null) Debug.LogError("GameManager not found");
         grids = GameObject.FindGameObjectsWithTag("Grid");
         if (grids == null) Debug.LogError("Grid not found");

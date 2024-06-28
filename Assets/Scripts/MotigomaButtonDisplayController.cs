@@ -9,15 +9,20 @@ public class MotigomaButtonDisplayController : MonoBehaviour
     [SerializeField] Button[] masterMotigomaButton = new Button[7];
     [SerializeField] Button[] clientMotigomaButton = new Button[7];
     MotigomaManager motigomaManager;
-    void Start()
+    void Awake()
     {
         motigomaManager = GameObject.FindGameObjectWithTag("MM").GetComponent<MotigomaManager>();
+    }
+    void Start()
+    {
+        ControlButtonDisplay();
     }
 
     // Update is called once per frame
     public void ControlButtonDisplay()
     {
-        if(motigomaManager == null){
+        if (motigomaManager == null)
+        {
             Debug.Log("Loading...");
             return;
         }

@@ -11,6 +11,8 @@ TagManager:
   - GM
   - RoleLetter
   - MM
+  - VC
+  - CC
   layers:
   - Default
   - TransparentFX

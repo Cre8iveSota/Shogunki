@@ -10,7 +10,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject nari, nariPanel;
     [SerializeField] private TMP_Text senteTimerText, goteTimerText;
     [SerializeField] private TMP_Text senteTimerNum, goteTimerNum;
-    public bool IsMasterTurn { get { return isMasterTurn; } set { isMasterTurn = value; } }
+    [SerializeField] private GameObject masterCamera, masterGridCamera;
+    [SerializeField] private GameObject clientCamera, clientGridCamera;
+    public bool IsMasterTurn
+    {
+        get { return isMasterTurn; }
+        set
+        {
+            isMasterTurn = value;
+            cameraChanger.HitCommanderView();
+        }
+    }
     private float timeCnt = 0;
     private float timeCntTurn = 0;
     private int entireTime;
@@ -31,13 +41,18 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    private CameraChanger cameraChanger;
     // Start is called before the first frame update
+    void Awake()
+    {
+        cameraChanger = GameObject.FindGameObjectWithTag("CC").GetComponent<CameraChanger>();
+    }
     void Start()
     {
-        isMasterTurn = true;
         nari.SetActive(false);
         senteTimeLimit = 60;
         goteTimeLimit = 60;
+        IsMasterTurn = true;
     }
 
     // Update is called once per frame
@@ -46,7 +61,7 @@ public class GameManager : MonoBehaviour
         timeCnt += Time.deltaTime;
         timeCntTurn += Time.deltaTime;
         entireTime = (int)timeCnt;
-        CountDownTimer(isMasterTurn);
+        CountDownTimer(IsMasterTurn);
     }
 
     /// this method is called after moved character every time
@@ -101,7 +116,7 @@ public class GameManager : MonoBehaviour
         {
             nari.SetActive(false);
         }
-        TurnChange(isMasterTurn);
+        TurnChange(IsMasterTurn);
         isCallingNari = false;
         nariPanel.GetComponent<Image>().raycastTarget = false;
         nariPanel.GetComponent<Image>().color = new Color(255, 255, 255, 0);
@@ -115,7 +130,7 @@ public class GameManager : MonoBehaviour
             if (senteTimeLimit - timeCntTurn <= 0)
             {
                 CloseNariWindow();
-                TurnChange(isMasterTurn);
+                TurnChange(IsMasterTurn);
             }
         }
         else
@@ -124,7 +139,7 @@ public class GameManager : MonoBehaviour
             if (goteTimeLimit - timeCntTurn <= 0)
             {
                 CloseNariWindow();
-                TurnChange(isMasterTurn);
+                TurnChange(IsMasterTurn);
             }
         }
     }
@@ -144,9 +159,9 @@ public class GameManager : MonoBehaviour
         timeCntTurn = 0;
         senteTimeLimit = 59;
         goteTimeLimit = 59;
-        isMasterTurn = !isMasterTurnEnd;
+        IsMasterTurn = !isMasterTurnEnd;
         isCallingNari = false;
-        if (isMasterTurn)
+        if (IsMasterTurn)
         {
             senteTimerText.color = Color.black;
             senteTimerNum.color = Color.black;

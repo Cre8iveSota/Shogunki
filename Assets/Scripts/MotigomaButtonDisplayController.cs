@@ -15,8 +15,12 @@ public class MotigomaButtonDisplayController : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void ComtrolButtonDisplay()
+    public void ControlButtonDisplay()
     {
+        if(motigomaManager == null){
+            Debug.Log("Loading...");
+            return;
+        }
         if (motigomaManager.motigomaMasterHohei == 0) { masterMotigomaButton[0].interactable = false; }
         else { masterMotigomaButton[0].interactable = true; }
         if (motigomaManager.motigomaMasterKyosha == 0) { masterMotigomaButton[1].interactable = false; }

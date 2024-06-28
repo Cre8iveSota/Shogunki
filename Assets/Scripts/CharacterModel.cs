@@ -222,6 +222,7 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         || this.role == Role.NariKyoId
         || this.role == Role.NariKeiId
         || this.role == Role.NariGinId
+        || this.role == Role.KinshoId
         ) return;
 
         if ((this.HasMasterOwnership && gameManager.IsMasterTurn && this.GetCurrentPos().y <= -4)
@@ -282,4 +283,3 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         }
     }
 }
-

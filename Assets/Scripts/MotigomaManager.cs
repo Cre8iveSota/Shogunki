@@ -119,7 +119,7 @@ public class MotigomaManager : MonoBehaviour
 
     private void ShowTheNumberOfMotigoma()
     {
-        motigomaButtonDisplayController.ComtrolButtonDisplay();
+        motigomaButtonDisplayController.ControlButtonDisplay();
         motigomaMasterHoheiText.text = $"歩兵\n{motigomaMasterHohei}";
         motigomaClientHoheiText.text = $"歩兵\n{motigomaClientHohei}";
         motigomaMasterKyoshaText.text = $"香車\n{motigomaMasterKyosha}";
@@ -235,7 +235,7 @@ public class MotigomaManager : MonoBehaviour
         }
 
         // Get empty grid
-        //call color() 
+        //call color()
         foreach (GameObject grid in boardManager.GetEmptyCoordinate())
         {
             grid.GetComponent<BoardInfo>().ColoringGrid(color);
@@ -333,5 +333,3 @@ public class MotigomaManager : MonoBehaviour
         }
     }
 }
-
-

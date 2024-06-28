@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     /// this method is called after moved character every time
     public void CallNari(CharacterModel chara)
     {
-        if (chara.Role == Role.KiinshoId || chara.Role == Role.NarikinId || chara.Role == Role.NariKakuId || chara.Role == Role.NariHishaId)
+        if (chara.Role == Role.KinshoId || chara.Role == Role.NarikinId || chara.Role == Role.NariKakuId || chara.Role == Role.NariHishaId || chara.Role == Role.TokinId || chara.Role == Role.NariKyoId || chara.Role == Role.NariKeiId || chara.Role == Role.NariGinId)
         {
             Debug.Log("This chara is already Nari");
             return;
@@ -75,10 +75,16 @@ public class GameManager : MonoBehaviour
             switch (targetNari.Role)
             {
                 case Role.HoheiId:
+                    targetNari.Role = Role.TokinId;
+                    break;
                 case Role.KyoshaId:
+                    targetNari.Role = Role.NariKyoId;
+                    break;
                 case Role.KeumaId:
+                    targetNari.Role = Role.NariKeiId;
+                    break;
                 case Role.GinshoId:
-                    targetNari.Role = Role.NarikinId;
+                    targetNari.Role = Role.NariGinId;
                     break;
                 case Role.KakugyoId:
                     targetNari.Role = Role.NariKakuId;

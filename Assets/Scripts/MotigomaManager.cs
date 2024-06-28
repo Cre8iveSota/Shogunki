@@ -65,12 +65,6 @@ public class MotigomaManager : MonoBehaviour
 
     public void UpdateMotigoma(bool isMaster)
     {
-        if (attackedCharacter != null)
-        {
-            if (isMaster) MasterMotigoma.Add(attackedCharacter);
-            else ClientMotigoma.Add(attackedCharacter);
-            attackedCharacter = null;
-        }
 
         senteMotigomaList.SetActive(isMaster);
         goteteMotigomaList.SetActive(!isMaster);
@@ -78,26 +72,32 @@ public class MotigomaManager : MonoBehaviour
         switch (updateMotigomaTargetRole)
         {
             case Role.HoheiId:
+            case Role.TokinId:
                 if (isMaster) motigomaMasterHohei++;
                 else motigomaClientHohei++;
                 break;
             case Role.KyoshaId:
+            case Role.NariKyoId:
                 if (isMaster) motigomaMasterKyosha++;
                 else motigomaClientKyosha++;
                 break;
             case Role.KeumaId:
+            case Role.NariKeiId:
                 if (isMaster) motigomaMasterKeuma++;
                 else motigomaClientKeuma++;
                 break;
             case Role.GinshoId:
+            case Role.NariGinId:
                 if (isMaster) motigomaMasterGinsho++;
                 else motigomaClientGinsho++;
                 break;
-            case Role.KiinshoId:
+            case Role.KinshoId:
+            case Role.NarikinId:
                 if (isMaster) motigomaMasterKinsho++;
                 else motigomaClientKinsho++;
                 break;
             case Role.KakugyoId:
+            case Role.NariKakuId:
                 if (isMaster) motigomaMasterKakugyo++;
                 else motigomaClientKakugyo++;
                 break;
@@ -164,9 +164,12 @@ public class MotigomaManager : MonoBehaviour
             Debug.Log($"Start InsertSummonTargetMotigoma as isMaster true, masterMotigoma Count: {masterMotigoma.Count}");
             foreach (CharacterModel charaModel in masterMotigoma)
             {
-                Debug.Log($"InsertSummonTargetMotigoma: masterMotigoma count: {masterMotigoma.Count}, charaModel.Role: {charaModel.Role}, roleNum: {roleNum} ");
+                string roleString = (int)charaModel.Role > 9 ? ((int)charaModel.Role).ToString().Substring(1, 1) : ((int)charaModel.Role).ToString();
+                Debug.Log($"Role: {charaModel.Role}, roleString: {roleString}");
+                Debug.Log($"InsertSummonTargetMotigoma: masterMotigoma count: {masterMotigoma.Count}, charaModel.Role: {(int)charaModel.Role}, roleNum: {roleNum} ");
                 if ((int)charaModel.Role == roleNum)
                 {
+                    charaModel.Role = (Role)int.Parse(roleString);
                     summonTargetMotigomaMaster = charaModel;
                     return;
                 }
@@ -174,10 +177,14 @@ public class MotigomaManager : MonoBehaviour
         }
         if (!isMaster)
         {
+            Debug.Log($"Start InsertSummonTargetMotigoma as isMaster false, clientMotigoma Count: {clientMotigoma.Count}");
             foreach (CharacterModel charaModel in clientMotigoma)
             {
-                if ((int)charaModel.Role == roleNum)
+                string roleString = (int)charaModel.Role > 9 ? ((int)charaModel.Role).ToString().Substring(1, 1) : ((int)charaModel.Role).ToString();
+                Debug.Log($"Role: {charaModel.Role}, roleString: {roleString}");
+                if (int.Parse(roleString) == roleNum)
                 {
+                    charaModel.Role = (Role)int.Parse(roleString);
                     summonTargetMotigomaClient = charaModel;
                     return;
                 }
@@ -200,7 +207,7 @@ public class MotigomaManager : MonoBehaviour
             case (int)Role.KyoshaId:
             case (int)Role.KeumaId:
             case (int)Role.GinshoId:
-            case (int)Role.KiinshoId:
+            case (int)Role.KinshoId:
             case (int)Role.KakugyoId:
             case (int)Role.HishaId:
                 IsUsingMotigoma = true;
@@ -253,17 +260,30 @@ public class MotigomaManager : MonoBehaviour
     {
         if (isMaster)
         {
+            Debug.Log($"Master SUMMON TARGET is +{summonTargetMotigomaMaster.name}");
+            if (summonTargetMotigomaMaster.Id.Substring(summonTargetMotigomaMaster.Id.Length - 1) == "1")
+            {
+                summonTargetMotigomaMaster.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            }
             summonTargetMotigomaMaster.transform.position = new Vector3(gridPosX, 0.1f, gridPosZ);
             summonTargetMotigomaMaster.IsAlive = true;
             MasterMotigoma.Remove(summonTargetMotigomaMaster);
+            Debug.Log($"PutMotigoma isMaster true, masterMotigoma Count: {masterMotigoma.Count}");
             DecreaseMotigomaNum(isMaster, summonTargetMotigomaMaster.Role);
             ShowTheNumberOfMotigoma();
         }
         else
         {
+            Debug.Log("Client SUMMON TARGET is +" + summonTargetMotigomaClient.Id);
+            Debug.Log("ID last:" + summonTargetMotigomaClient.Id.Substring(summonTargetMotigomaClient.Id.Length - 1));
+            if (summonTargetMotigomaClient.Id.Substring(summonTargetMotigomaClient.Id.Length - 1) == "0")
+            {
+                summonTargetMotigomaClient.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            }
             summonTargetMotigomaClient.transform.position = new Vector3(gridPosX, 0.1f, gridPosZ);
             summonTargetMotigomaClient.IsAlive = true;
             ClientMotigoma.Remove(summonTargetMotigomaClient);
+            Debug.Log($"PutMotigoma isMaster true, clientMotigoma Count: {clientMotigoma.Count}");
             DecreaseMotigomaNum(isMaster, summonTargetMotigomaClient.Role);
             ShowTheNumberOfMotigoma();
         }
@@ -290,7 +310,7 @@ public class MotigomaManager : MonoBehaviour
                 if (isMaster) motigomaMasterGinsho--;
                 else motigomaClientGinsho--;
                 break;
-            case Role.KiinshoId:
+            case Role.KinshoId:
                 if (isMaster) motigomaMasterKinsho--;
                 else motigomaClientKinsho--;
                 break;

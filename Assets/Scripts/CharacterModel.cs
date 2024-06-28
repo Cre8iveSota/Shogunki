@@ -13,7 +13,15 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
     [SerializeField] private bool hasMasterOwnership;
     public bool HasMasterOwnership { get { return hasMasterOwnership; } set { hasMasterOwnership = value; } }
     [SerializeField] bool isAlive;
-    public bool IsAlive { get { return isAlive; } set { isAlive = value; } }
+    public bool IsAlive
+    {
+        get { return isAlive; }
+        set
+        {
+            isAlive = value;
+            Die(isAlive);
+        }
+    }
     bool isMasterPlayerTapped = false;
     bool isClientPlayerTapped = false;
     Vector3 currentPos;
@@ -115,12 +123,12 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
                 roleLetter.GetComponent<TMP_Text>().text = "香車";
                 return new[] { (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.KeumaId:
-                roleLetter.GetComponent<TMP_Text>().text = "佳馬";
+                roleLetter.GetComponent<TMP_Text>().text = "桂馬";
                 return new[] { (1, 2), (-1, 2) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.GinshoId:
                 roleLetter.GetComponent<TMP_Text>().text = "銀将";
                 return new[] { (-1, 1), (0, 1), (1, 1), (1, -1), (-1, -1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
-            case Role.KiinshoId:
+            case Role.KinshoId:
                 roleLetter.GetComponent<TMP_Text>().text = "金将";
                 return new[] { (-1, 1), (0, 1), (1, 1), (-1, 0), (1, 0), (0, -1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
             case Role.KakugyoId:
@@ -160,8 +168,20 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
                     ,(-1, 0), (-2, 0), (-3, 0), (-4, 0), (-5, 0), (-6, 0), (-7, 0), (-8, 0), (-9, 0)
                     ,(0, -1), (0, 1), (1, 1), (-1, 0), (1, 0), (-1, -1), (-1, 0), (1, -1)
                 }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
-            case Role.NarikinId:
-                roleLetter.GetComponent<TMP_Text>().text = "成金";
+            // case Role.NarikinId:
+            //     roleLetter.GetComponent<TMP_Text>().text = "成金";
+            //     return new[] { (-1, 1), (0, 1), (1, 1), (-1, 0), (1, 0), (0, -1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
+            case Role.TokinId:
+                roleLetter.GetComponent<TMP_Text>().text = "と金";
+                return new[] { (-1, 1), (0, 1), (1, 1), (-1, 0), (1, 0), (0, -1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
+            case Role.NariKyoId:
+                roleLetter.GetComponent<TMP_Text>().text = "成香";
+                return new[] { (-1, 1), (0, 1), (1, 1), (-1, 0), (1, 0), (0, -1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
+            case Role.NariKeiId:
+                roleLetter.GetComponent<TMP_Text>().text = "成桂";
+                return new[] { (-1, 1), (0, 1), (1, 1), (-1, 0), (1, 0), (0, -1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
+            case Role.NariGinId:
+                roleLetter.GetComponent<TMP_Text>().text = "成銀";
                 return new[] { (-1, 1), (0, 1), (1, 1), (-1, 0), (1, 0), (0, -1) }.Select(p => (p.Item1, p.Item2 * directionFactor)).ToArray();
         }
         return null;
@@ -178,10 +198,7 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         NariEnableCheck();
 
         // Check there is oppornent
-        if (boardManager.AttackingTarget != null) Attack();
-
-        // true: Attack and Delete and Change
-        // Todo: Chnage the isTurnPlayerMoved true
+        if (boardManager.AttackingTarget != null) { Attack(); Debug.Log("Attack chara:" + this.id); }
 
         if (!gameManager.IsCallingNari) gameManager.TurnChange(gameManager.IsMasterTurn);
 
@@ -190,9 +207,13 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
 
     private void NariEnableCheck()
     {
-        if (this.role == Role.NarikinId
-        || this.role == Role.NariKakuId
+        if (
+         this.role == Role.NariKakuId
         || this.role == Role.NariHishaId
+        || this.role == Role.TokinId
+        || this.role == Role.NariKyoId
+        || this.role == Role.NariKeiId
+        || this.role == Role.NariGinId
         ) return;
 
         if ((this.HasMasterOwnership && gameManager.IsMasterTurn && this.GetCurrentPos().y <= -4)
@@ -217,9 +238,15 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         motigomaManager.AttackedCharacter = boardManager.AttackingTarget;
 
         boardManager.AttackingTarget.IsAlive = false;
-        boardManager.AttackingTarget.HasMasterOwnership = gameManager.IsMasterTurn;
-        boardManager.AttackingTarget.gameObject.tag = gameManager.IsMasterTurn ? "MasterCharacter" : "ClientCharacter";
-        boardManager.AttackingTarget.gameObject.transform.position = Vector3.left * 100;
+    }
+    private void Die(bool isAlive)
+    {
+        if (!isAlive)
+        {
+            boardManager.AttackingTarget.HasMasterOwnership = gameManager.IsMasterTurn;
+            boardManager.AttackingTarget.gameObject.tag = gameManager.IsMasterTurn ? "MasterCharacter" : "ClientCharacter";
+            boardManager.AttackingTarget.gameObject.transform.position = new Vector3(boardManager.AttackingTarget.gameObject.transform.position.x * 100, 0f, 0);
+        }
     }
 
 

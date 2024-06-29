@@ -57,21 +57,45 @@ public class CameraChanger : MonoBehaviour
         characterView.SetActive(false);
     }
 
-    public void HitCommanderView()
+    public void HitCommanderView(bool isFront)
     {
-        if (gameManager.IsMasterTurn)
+        if (isFront)
         {
-            godView.SetActive(false);
-            masterCommanderView.SetActive(true);
-            clientCommanderView.SetActive(false);
-            characterView.SetActive(false);
+            if (gameManager.IsMasterTurn)
+            {
+                godView.SetActive(false);
+                masterCommanderView.SetActive(true);
+                masterCommanderView.transform.position = new Vector3(0, 0, -10);
+                clientCommanderView.SetActive(false);
+                characterView.SetActive(false);
+            }
+            else
+            {
+                godView.SetActive(false);
+                masterCommanderView.SetActive(false);
+                clientCommanderView.SetActive(true);
+                clientCommanderView.transform.position = new Vector3(0, 0, 10);
+                characterView.SetActive(false);
+            }
         }
         else
         {
-            godView.SetActive(false);
-            masterCommanderView.SetActive(false);
-            clientCommanderView.SetActive(true);
-            characterView.SetActive(false);
+            if (gameManager.IsMasterTurn)
+            {
+                godView.SetActive(false);
+                masterCommanderView.SetActive(true);
+                masterCommanderView.transform.position = new Vector3(0, 0, 0);
+                clientCommanderView.SetActive(false);
+                characterView.SetActive(false);
+            }
+            else
+            {
+                godView.SetActive(false);
+                masterCommanderView.SetActive(false);
+                clientCommanderView.SetActive(true);
+                clientCommanderView.transform.position = new Vector3(0, 0, 0);
+                characterView.SetActive(false);
+            }
         }
     }
     public void HitCharacterView()
@@ -80,7 +104,7 @@ public class CameraChanger : MonoBehaviour
         masterCommanderView.SetActive(false);
         clientCommanderView.SetActive(false);
         characterView.SetActive(true);
-        _vc.Follow = boardManager.TouchedChara.transform;
+        _vc.Follow = boardManager.TouchedChara != null ? boardManager.TouchedChara.transform : gameManager.IsMasterTurn ? masterKingAsForCharaViewDefault.transform : clientKingAsForCharaViewDefault.transform;
         if (gameManager.IsMasterTurn && cModelMater.IsAlive)
         {
             _vc.LookAt = clientKingAsForCharaViewDefault.transform;

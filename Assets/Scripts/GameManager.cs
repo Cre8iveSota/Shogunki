@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         set
         {
             isMasterTurn = value;
-            cameraChanger.HitCommanderView();
+            cameraChanger.HitCommanderView(false);
         }
     }
     private float timeCnt = 0;

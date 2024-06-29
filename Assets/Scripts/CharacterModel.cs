@@ -218,8 +218,8 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         {
             float progress = moveTween.Elapsed() / (1 + 0.2f * Vector3.Distance(boardManager.CurrentPos, new Vector3(x, 0.1f, y)));
 
-            // 進行状況が80%に達したら関数を呼び出す
-            if (progress >= 0.5f && boardManager.AttackingTarget != null && !hasCalledFunction)
+            // 進行状況が40%に達したら関数を呼び出す
+            if (progress >= 0.3f && boardManager.AttackingTarget != null && !hasCalledFunction)
             {
                 boardManager.TouchedChara.GetComponent<CharacterModel>().animator.SetInteger("actionNum", 2);
                 hasCalledFunction = true;

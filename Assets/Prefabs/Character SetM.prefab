@@ -814,7 +814,7 @@ Animator:
   m_GameObject: {fileID: 464244113003210898}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -839,7 +839,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 0
+  isAlive: 0
+  role: 6
 --- !u!65 &7360525737488115740
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -936,7 +937,7 @@ Animator:
   m_GameObject: {fileID: 483653271920492674}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -961,6 +962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
+  isAlive: 0
   role: 0
 --- !u!65 &5809065789400318083
 BoxCollider:
@@ -2558,9 +2560,10 @@ GameObject:
   - component: {fileID: 362976536274967447}
   - component: {fileID: 8438324946828347820}
   - component: {fileID: 8227042555840088684}
+  - component: {fileID: 531940078102498093}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2718,6 +2721,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8438324946828347820}
   m_maskType: 0
+--- !u!114 &531940078102498093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170627436593317166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1175275938423103350
 GameObject:
   m_ObjectHideFlags: 0
@@ -2953,9 +2968,10 @@ GameObject:
   - component: {fileID: 5700064321165542902}
   - component: {fileID: 2618542962894884653}
   - component: {fileID: 7377065779636056050}
+  - component: {fileID: 6443670158655196691}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3113,6 +3129,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 2618542962894884653}
   m_maskType: 0
+--- !u!114 &6443670158655196691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319169359137222925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1327573615919873715
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,9 +3351,10 @@ GameObject:
   - component: {fileID: 7674501292471089574}
   - component: {fileID: 4577653503290495102}
   - component: {fileID: 8674045469532843526}
+  - component: {fileID: 8776391739884294160}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3483,6 +3512,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4577653503290495102}
   m_maskType: 0
+--- !u!114 &8776391739884294160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450642429094638358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1467670447632420475
 GameObject:
   m_ObjectHideFlags: 0
@@ -3629,7 +3670,7 @@ Animator:
   m_GameObject: {fileID: 1482773756948094930}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3654,7 +3695,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 0
+  isAlive: 0
+  role: 7
 --- !u!65 &7348967447735499927
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3847,7 +3889,7 @@ Animator:
   m_GameObject: {fileID: 1511861914820434572}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3872,7 +3914,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 0
+  isAlive: 0
+  role: 2
 --- !u!65 &5570121853766572655
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4708,9 +4751,10 @@ GameObject:
   - component: {fileID: 69031547110916978}
   - component: {fileID: 7937506828556880478}
   - component: {fileID: 5727587937064303727}
+  - component: {fileID: 7594055396518016102}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4868,6 +4912,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7937506828556880478}
   m_maskType: 0
+--- !u!114 &7594055396518016102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923027525823520379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1936210444372833632
 GameObject:
   m_ObjectHideFlags: 0
@@ -4980,7 +5036,7 @@ Animator:
   m_GameObject: {fileID: 1974058063221304821}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5005,6 +5061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
+  isAlive: 0
   role: 0
 --- !u!65 &8763048768223363049
 BoxCollider:
@@ -5330,7 +5387,7 @@ Animator:
   m_GameObject: {fileID: 2114219512274540195}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5355,7 +5412,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 0
+  isAlive: 0
+  role: 5
 --- !u!65 &538465545804940815
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5583,7 +5641,7 @@ Animator:
   m_GameObject: {fileID: 2212729781425467004}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5608,7 +5666,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 0
+  isAlive: 0
+  role: 11
 --- !u!65 &8709240731028995778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6486,7 +6545,7 @@ Animator:
   m_GameObject: {fileID: 2538110389786046887}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6511,7 +6570,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 0
+  isAlive: 0
+  role: 11
 --- !u!65 &2181835870159008653
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6980,9 +7040,10 @@ GameObject:
   - component: {fileID: 2124256755203699600}
   - component: {fileID: 746320973392829863}
   - component: {fileID: 5850825095287343273}
+  - component: {fileID: 1649765192897497357}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7140,6 +7201,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 746320973392829863}
   m_maskType: 0
+--- !u!114 &1649765192897497357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2650075506808799476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2666086344888191597
 GameObject:
   m_ObjectHideFlags: 0
@@ -7284,7 +7357,7 @@ Animator:
   m_GameObject: {fileID: 2723772703420269874}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7309,6 +7382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
+  isAlive: 0
   role: 0
 --- !u!65 &1093934074700484871
 BoxCollider:
@@ -7948,7 +8022,7 @@ Animator:
   m_GameObject: {fileID: 3130159592805018778}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7973,6 +8047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
+  isAlive: 0
   role: 0
 --- !u!65 &76314578752042139
 BoxCollider:
@@ -8070,7 +8145,7 @@ Animator:
   m_GameObject: {fileID: 3167439673187159906}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8095,7 +8170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 0
+  isAlive: 0
+  role: 4
 --- !u!65 &1827230141338502706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8192,7 +8268,7 @@ Animator:
   m_GameObject: {fileID: 3195285844255983243}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8217,7 +8293,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 0
+  isAlive: 0
+  role: 2
 --- !u!65 &5457595089915611179
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8414,9 +8491,10 @@ GameObject:
   - component: {fileID: 3364352888560286074}
   - component: {fileID: 4550014150567225352}
   - component: {fileID: 7330995206001308328}
+  - component: {fileID: 8394876322861258124}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8574,6 +8652,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4550014150567225352}
   m_maskType: 0
+--- !u!114 &8394876322861258124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3220851828465119726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3238004269883475497
 GameObject:
   m_ObjectHideFlags: 0
@@ -8964,7 +9054,7 @@ Animator:
   m_GameObject: {fileID: 3444420754362508686}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8989,6 +9079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
+  isAlive: 0
   role: 0
 --- !u!65 &4365254821410671179
 BoxCollider:
@@ -9628,9 +9719,10 @@ GameObject:
   - component: {fileID: 6175019076197954082}
   - component: {fileID: 5151754030489383863}
   - component: {fileID: 1796795680785902139}
+  - component: {fileID: 6532613579900431907}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9788,6 +9880,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 5151754030489383863}
   m_maskType: 0
+--- !u!114 &6532613579900431907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4011793834243988060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4051158431670558274
 GameObject:
   m_ObjectHideFlags: 0
@@ -10194,9 +10298,10 @@ GameObject:
   - component: {fileID: 109826603341931454}
   - component: {fileID: 7146821358171836296}
   - component: {fileID: 6287797212980064133}
+  - component: {fileID: 326164835306451990}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10354,6 +10459,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7146821358171836296}
   m_maskType: 0
+--- !u!114 &326164835306451990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205473078950132785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4206578510385804981
 GameObject:
   m_ObjectHideFlags: 0
@@ -11658,7 +11775,7 @@ Animator:
   m_GameObject: {fileID: 4398989250972692416}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -11683,6 +11800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
+  isAlive: 0
   role: 0
 --- !u!65 &3150186630984436651
 BoxCollider:
@@ -12551,9 +12669,10 @@ GameObject:
   - component: {fileID: 3384233951362865495}
   - component: {fileID: 7387847298672097}
   - component: {fileID: 3076765013247639322}
+  - component: {fileID: 6182076230099626869}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12711,6 +12830,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7387847298672097}
   m_maskType: 0
+--- !u!114 &6182076230099626869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4777534176734341454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4788793799445059676
 GameObject:
   m_ObjectHideFlags: 0
@@ -13400,7 +13531,7 @@ Animator:
   m_GameObject: {fileID: 5092307222300285691}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -13425,7 +13556,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 0
+  isAlive: 0
+  role: 3
 --- !u!65 &4372314761931267162
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13973,7 +14105,7 @@ Animator:
   m_GameObject: {fileID: 5305551890541617635}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -13998,7 +14130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 0
+  isAlive: 0
+  role: 4
 --- !u!65 &6530693831339613632
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15417,9 +15550,10 @@ GameObject:
   - component: {fileID: 981971551447533505}
   - component: {fileID: 7819859310367479526}
   - component: {fileID: 836298151305757121}
+  - component: {fileID: 1933392736987835216}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15577,6 +15711,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7819859310367479526}
   m_maskType: 0
+--- !u!114 &1933392736987835216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5925667819696741711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5967140059267764017
 GameObject:
   m_ObjectHideFlags: 0
@@ -16034,9 +16180,10 @@ GameObject:
   - component: {fileID: 2020437271059225}
   - component: {fileID: 16523036916767034}
   - component: {fileID: 7735510005029986044}
+  - component: {fileID: 767136014849914780}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16194,6 +16341,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 16523036916767034}
   m_maskType: 0
+--- !u!114 &767136014849914780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6123827708397181610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6145202501062301711
 GameObject:
   m_ObjectHideFlags: 0
@@ -16428,9 +16587,10 @@ GameObject:
   - component: {fileID: 2546999662735310491}
   - component: {fileID: 5863071680658773452}
   - component: {fileID: 6303223525582074996}
+  - component: {fileID: 2597550400146672580}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16588,6 +16748,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 5863071680658773452}
   m_maskType: 0
+--- !u!114 &2597550400146672580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6294727652748824678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6298588748817453640
 GameObject:
   m_ObjectHideFlags: 0
@@ -18091,9 +18263,10 @@ GameObject:
   - component: {fileID: 5573416877836832638}
   - component: {fileID: 8659779167143107295}
   - component: {fileID: 7620090180303411091}
+  - component: {fileID: 94095666990153872}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18251,6 +18424,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8659779167143107295}
   m_maskType: 0
+--- !u!114 &94095666990153872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166335760987619694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7179776175040363157
 GameObject:
   m_ObjectHideFlags: 0
@@ -18651,9 +18836,10 @@ GameObject:
   - component: {fileID: 8308582270776244910}
   - component: {fileID: 3310949066041915853}
   - component: {fileID: 2704346641142392421}
+  - component: {fileID: 8824456380275304639}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18811,6 +18997,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 3310949066041915853}
   m_maskType: 0
+--- !u!114 &8824456380275304639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7329490435043613000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7337977926107242912
 GameObject:
   m_ObjectHideFlags: 0
@@ -19142,9 +19340,10 @@ GameObject:
   - component: {fileID: 8360630375111178322}
   - component: {fileID: 354376950362723430}
   - component: {fileID: 3555981041026419387}
+  - component: {fileID: 3991637252904855815}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19302,6 +19501,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 354376950362723430}
   m_maskType: 0
+--- !u!114 &3991637252904855815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7511795302504217565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7522361455509034051
 GameObject:
   m_ObjectHideFlags: 0
@@ -20116,7 +20327,7 @@ Animator:
   m_GameObject: {fileID: 7915265904510019168}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -20141,6 +20352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
+  isAlive: 0
   role: 0
 --- !u!65 &4226296827105147743
 BoxCollider:
@@ -20747,9 +20959,10 @@ GameObject:
   - component: {fileID: 1065701855384732648}
   - component: {fileID: 8325856916576568925}
   - component: {fileID: 343087928062871060}
+  - component: {fileID: 6650787572571896518}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20907,6 +21120,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8325856916576568925}
   m_maskType: 0
+--- !u!114 &6650787572571896518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8204868823893841763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8273763117175938439
 GameObject:
   m_ObjectHideFlags: 0
@@ -20982,9 +21207,10 @@ GameObject:
   - component: {fileID: 7626529226537404998}
   - component: {fileID: 8850180355189201097}
   - component: {fileID: 5928952884698073224}
+  - component: {fileID: 4132598337194684427}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21142,6 +21368,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8850180355189201097}
   m_maskType: 0
+--- !u!114 &4132598337194684427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8319329578959670236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8330861204067614830
 GameObject:
   m_ObjectHideFlags: 0
@@ -21312,9 +21550,10 @@ GameObject:
   - component: {fileID: 9182502406062042863}
   - component: {fileID: 320746202012702735}
   - component: {fileID: 2524351720263599643}
+  - component: {fileID: 7026135495118707619}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21472,6 +21711,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 320746202012702735}
   m_maskType: 0
+--- !u!114 &7026135495118707619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408173388337216621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8418503035581295920
 GameObject:
   m_ObjectHideFlags: 0
@@ -21552,7 +21803,7 @@ Animator:
   m_GameObject: {fileID: 8426045117644344644}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -21577,6 +21828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
+  isAlive: 0
   role: 0
 --- !u!65 &6140422563282926452
 BoxCollider:
@@ -22000,7 +22252,7 @@ Animator:
   m_GameObject: {fileID: 8601391983185211812}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -22025,6 +22277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
+  isAlive: 0
   role: 0
 --- !u!65 &6354376074143734452
 BoxCollider:
@@ -22561,9 +22814,10 @@ GameObject:
   - component: {fileID: 7887380794417812170}
   - component: {fileID: 857735793181979207}
   - component: {fileID: 1068344287290577706}
+  - component: {fileID: 3208271564934313638}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22721,6 +22975,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 857735793181979207}
   m_maskType: 0
+--- !u!114 &3208271564934313638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848807173530158502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8857517961753683973
 GameObject:
   m_ObjectHideFlags: 0
@@ -22924,9 +23190,10 @@ GameObject:
   - component: {fileID: 442999777362849267}
   - component: {fileID: 8061335860496984392}
   - component: {fileID: 3803502620026427300}
+  - component: {fileID: 7559570374545092153}
   m_Layer: 7
   m_Name: Role Letter
-  m_TagString: Untagged
+  m_TagString: RoleLetter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23084,6 +23351,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8061335860496984392}
   m_maskType: 0
+--- !u!114 &7559570374545092153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8924794804421213246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4095e077df34ed390ecd6cd1c590b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8927500139924992330
 GameObject:
   m_ObjectHideFlags: 0
@@ -23845,7 +24124,7 @@ Animator:
   m_GameObject: {fileID: 9214599932524162991}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2754eca5dad3a5949bc56c5d438a5df6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -23870,7 +24149,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   hasMasterOwnership: 1
-  role: 0
+  isAlive: 0
+  role: 3
 --- !u!65 &8378131111564562472
 BoxCollider:
   m_ObjectHideFlags: 0

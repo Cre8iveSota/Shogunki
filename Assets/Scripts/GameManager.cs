@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        Time.timeScale = 1;
         GameEndPanel.SetActive(false);
         nari.SetActive(false);
         senteTimeLimit = 60;

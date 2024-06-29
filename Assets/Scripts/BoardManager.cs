@@ -117,7 +117,7 @@ public class BoardManager : MonoBehaviour
             CallChangeColorMovablePos();
         }
     }
-    private CharacterModel attackingTarget;
+   [SerializeField]  private CharacterModel attackingTarget;
     public CharacterModel AttackingTarget
     {
         get { return attackingTarget; }
@@ -127,6 +127,10 @@ public class BoardManager : MonoBehaviour
             if (attackingTarget != null)
             {
                 Debug.Log($"attacking target is found: {attackingTarget.Id}");
+                if (attackingTarget.Role == Role.OhId)
+                {
+                    gameManager.GameEnd(gameManager.IsMasterTurn);
+                }
             }
         }
     }

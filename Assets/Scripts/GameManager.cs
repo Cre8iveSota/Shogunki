@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text senteTimerNum, goteTimerNum;
     [SerializeField] private GameObject masterCamera, masterGridCamera;
     [SerializeField] private GameObject clientCamera, clientGridCamera;
+    [SerializeField] private GameObject GameEndPanel;
+    [SerializeField] private TMP_Text WinnerText;
     public bool IsMasterTurn
     {
         get { return isMasterTurn; }
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        GameEndPanel.SetActive(false);
         nari.SetActive(false);
         senteTimeLimit = 60;
         goteTimeLimit = 60;
@@ -175,5 +178,12 @@ public class GameManager : MonoBehaviour
             goteTimerText.color = Color.black;
             goteTimerNum.color = Color.black;
         }
+    }
+
+    public void GameEnd(bool isMasterWin)
+    {
+        Time.timeScale = 0;
+        GameEndPanel.SetActive(true);
+        WinnerText.text = isMasterWin ? "先手勝利" : "後手勝利";
     }
 }

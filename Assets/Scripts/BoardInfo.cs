@@ -131,6 +131,7 @@ public class BoardInfo : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         print($"オブジェクト{name} ({eventData.pointerPress}) がクリックされたよ！");
+        if (gameManager.HasActed) return;
         if (motigomaManager.IsUsingMotigoma)
         {
             Renderer renderer = GetComponent<Renderer>();
@@ -138,7 +139,7 @@ public class BoardInfo : MonoBehaviour, IPointerClickHandler
             if (color == Color.green)
             {
                 motigomaManager.PutMotigoma(gameManager.IsMasterTurn, (int)this.transform.position.x, (int)this.transform.position.z);
-                gameManager.TurnChange(gameManager.IsMasterTurn);
+                gameManager.HasActed = true;
             }
         }
         else if (IsMovablePos && boardManager != null && boardManager.TouchedChara != null &&
@@ -161,4 +162,5 @@ public class BoardInfo : MonoBehaviour, IPointerClickHandler
             }
         }
     }
+
 }

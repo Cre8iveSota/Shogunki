@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -44,6 +45,23 @@ public class GameManager : MonoBehaviour
         }
     }
     private CameraChanger cameraChanger;
+    private bool hasActed;
+    public bool HasActed
+    {
+        get { return hasActed; }
+        set
+        {
+            hasActed = value;
+            if (hasActed)
+            {
+                if ((IsMasterTurn && senteTimeLimit > 1f) || (!IsMasterTurn && goteTimeLimit > 1f))
+                {
+                    StartCoroutine(WaitFunc(.5f, TurnChange));
+                }
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -57,6 +75,7 @@ public class GameManager : MonoBehaviour
         senteTimeLimit = 60;
         goteTimeLimit = 60;
         IsMasterTurn = true;
+        HasActed = false;
     }
 
     // Update is called once per frame
@@ -120,8 +139,8 @@ public class GameManager : MonoBehaviour
         {
             nari.SetActive(false);
         }
-        TurnChange(IsMasterTurn);
-        isCallingNari = false;
+        HasActed = true;
+        IsCallingNari = false;
         nariPanel.GetComponent<Image>().raycastTarget = false;
         nariPanel.GetComponent<Image>().color = new Color(255, 255, 255, 0);
     }
@@ -134,7 +153,7 @@ public class GameManager : MonoBehaviour
             if (senteTimeLimit - timeCntTurn <= 0)
             {
                 CloseNariWindow();
-                TurnChange(IsMasterTurn);
+                TurnChange();
             }
         }
         else
@@ -143,7 +162,7 @@ public class GameManager : MonoBehaviour
             if (goteTimeLimit - timeCntTurn <= 0)
             {
                 CloseNariWindow();
-                TurnChange(IsMasterTurn);
+                TurnChange();
             }
         }
     }
@@ -158,13 +177,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TurnChange(bool isMasterTurnEnd)
+    public void TurnChange()
     {
         timeCntTurn = 0;
         senteTimeLimit = 59;
         goteTimeLimit = 59;
-        IsMasterTurn = !isMasterTurnEnd;
-        isCallingNari = false;
+        IsMasterTurn = !IsMasterTurn;
+        IsCallingNari = false;
         if (IsMasterTurn)
         {
             senteTimerText.color = Color.black;
@@ -179,6 +198,8 @@ public class GameManager : MonoBehaviour
             goteTimerText.color = Color.black;
             goteTimerNum.color = Color.black;
         }
+        HasActed = false;
+        Debug.Log("TURN CHANGED HAVE BEEN CALLED");
     }
 
     public void GameEnd(bool isMasterWin)
@@ -186,5 +207,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         GameEndPanel.SetActive(true);
         WinnerText.text = isMasterWin ? "先手勝利" : "後手勝利";
+    }
+
+    IEnumerator WaitFunc(float seconds, Action func)
+    {
+        // 指定された秒数待機
+        yield return new WaitForSeconds(seconds);
+
+        // 関数を実行
+        func();
     }
 }

@@ -210,7 +210,9 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
 
         animator.SetInteger("actionNum", 1);
         // 移動前に成ポジションにいたら成を呼ぶ
+        Debug.Log($"gameManager.IsCallingNari2: {gameManager.IsCallingNari} ,HasActed: {gameManager.HasActed} This role {this.role}");
         NariEnableCheck();
+        Debug.Log($"gameManager.IsCallingNari22: {gameManager.IsCallingNari} ,HasActed: {gameManager.HasActed} This role {this.role}");
 
         transform.LookAt(new Vector3(x, 0.1f, y));
         Tween moveTween = boardManager.TouchedChara.transform.DOMove(new Vector3(x, 0.1f, y), 1 + 0.2f * Vector3.Distance(boardManager.CurrentPos, new Vector3(x, 0.1f, y)));
@@ -235,11 +237,21 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
                 animator.SetInteger("actionNum", 0);
                 transform.rotation = this.hasMasterOwnership ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
                 // 移動後に成ポジションにいたら成を呼ぶ
+                Debug.Log($"gameManager.IsCallingNari1: {gameManager.IsCallingNari} ,HasActed: {gameManager.HasActed} This role {this.role}");
                 NariEnableCheck();
-                if (!gameManager.IsCallingNari) gameManager.TurnChange(gameManager.IsMasterTurn);
+                Debug.Log($"gameManager.IsCallingNari11: {gameManager.IsCallingNari} ,HasActed: {gameManager.HasActed} This role {this.role}");
+                if (!gameManager.IsCallingNari)
+                {
+                    // 時間ギリギリでキャラクターを動かしたとき、動き終わるまでにカウントダウンでターンが終了してしまう可能性がある。その場合に、
+                    //ここで「HasActed = true;」を呼び出してしまうと、ターンが2度切り替わり、同じ人のターンが続くため、阻止するために、以下のチェックを入れる
+                    if ((gameManager.IsMasterTurn && this.hasMasterOwnership) || (!gameManager.IsMasterTurn && !this.hasMasterOwnership))
+                    {
+                        gameManager.HasActed = true;
+                    }
+                }
+                else { gameManager.CallNari(this); }
             }
         );
-
         Debug.Log("Move method is still construction");
     }
 
@@ -260,21 +272,21 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
     }
     private void NariEnableCheck()
     {
-        if (
-         this.role == Role.NariKakuId
+        if
+        (this.role == Role.NariKakuId
         || this.role == Role.NariHishaId
         || this.role == Role.TokinId
         || this.role == Role.NariKyoId
         || this.role == Role.NariKeiId
         || this.role == Role.NariGinId
-        || this.role == Role.KinshoId
-        ) return;
+        || this.role == Role.KinshoId)
+        {
+            return;
+        }
 
         if ((this.HasMasterOwnership && gameManager.IsMasterTurn && this.GetCurrentPos().y <= -4)
-        || (!this.HasMasterOwnership && !gameManager.IsMasterTurn && this.GetCurrentPos().y >= 4)
-        )
+        || (!this.HasMasterOwnership && !gameManager.IsMasterTurn && this.GetCurrentPos().y >= 4))
         {
-            gameManager.CallNari(this);
             gameManager.IsCallingNari = true;
         }
     }
@@ -306,6 +318,7 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         print($"オブジェクト{name} ({eventData.pointerPress}) がクリックされたよ！");
+        if (gameManager.HasActed) return;
         boardManager.TouchedChara = eventData.pointerPress;
         boardManager.CurrentPos = currentPos;
         boardManager.CharacterModelForTransfer = GetComponent<CharacterModel>();

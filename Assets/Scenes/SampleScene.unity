@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.6110978, g: 0.5546134, b: 0.6513033, a: 1}
+  m_IndirectSpecularColor: {r: 0.61110103, g: 0.5546186, b: 0.6513064, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -858,6 +858,7 @@ MonoBehaviour:
   clientGridCamera: {fileID: 1965771612}
   GameEndPanel: {fileID: 254636914}
   WinnerText: {fileID: 1588465632}
+  turnEndButton: {fileID: 0}
   senteTimeLimit: 0
   goteTimeLimit: 0
 --- !u!1 &189002399

@@ -36,6 +36,7 @@ public class BoardManager : MonoBehaviour
     private List<(int x, int y)> movablePos = new List<(int x, int y)>();
     public List<(int x, int y)> MovablePos { get { return movablePos; } set { movablePos = value; Debug.Log($"movable mouse Pos: {movablePos}"); } }
     public List<(int, int)> pastMovablePos = new List<(int x, int y)>();
+    public bool isDoneExpectedCalculate; // 念の為処理遅らせように追加
     private (int x, int y) expectedMovingPos;
     public (int x, int y) ExpectedMovingPos
     {
@@ -43,6 +44,9 @@ public class BoardManager : MonoBehaviour
         set
         {
             expectedMovingPos = value;
+
+            isDoneExpectedCalculate = false; // 念の為処理遅らせように追加
+
             cameraChanger.IsExpectedPosUpdated = true;
             Debug.Log($"Start finding the pos status of:({expectedMovingPos.x},{expectedMovingPos.y})");
             // check there is oppornent beofre chara move
@@ -67,6 +71,7 @@ public class BoardManager : MonoBehaviour
                             AttackingTarget = null;
                         }
                     }
+                    isDoneExpectedCalculate = true; // 念の為処理遅らせように追加
                 }
                 else if (!gameManager.IsMasterTurn && status == BoardStatus.ClientCharacterExist)
                 {
@@ -85,7 +90,12 @@ public class BoardManager : MonoBehaviour
                             AttackingTarget = null;
                         }
                     }
+                    isDoneExpectedCalculate = true; // 念の為処理遅らせように追加
                 }
+            }
+            while (!isDoneExpectedCalculate)
+            {
+                Debug.Log("Now waiting"); // 念の為処理遅らせように追加 じゃないとforeach文が終わる前に攻撃位置に移動し、その時点では攻撃対象の駒がないため、駒が取られない可能性がある。
             }
             characterModelForTransfer.Move(expectedMovingPos.x, expectedMovingPos.y);
             ResetAllGridAsMovableIsFalse();
@@ -117,7 +127,7 @@ public class BoardManager : MonoBehaviour
             CallChangeColorMovablePos();
         }
     }
-   [SerializeField]  private CharacterModel attackingTarget;
+    [SerializeField] private CharacterModel attackingTarget;
     public CharacterModel AttackingTarget
     {
         get { return attackingTarget; }

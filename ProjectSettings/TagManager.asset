@@ -13,6 +13,15 @@ TagManager:
   - MM
   - VC
   - CC
+  - View
+  - VisibleFS
+  - VisibleFR
+  - VisibleR
+  - VisibleBR
+  - VisibleBS
+  - VisibleBL
+  - VisibleL
+  - VisibleFL
   layers:
   - Default
   - TransparentFX

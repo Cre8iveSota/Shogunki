@@ -144,15 +144,53 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-    [SerializeField] private Vector3 gridUnitSize = new Vector3(2, 0, 2);
+    [SerializeField] public Vector3 gridUnitSize = new Vector3(2, 0, 2);
     private GameObject[] grids;
     private Dictionary<(int x, int y), GameObject> gridsPosDictionary = new Dictionary<(int x, int y), GameObject>();
     private CameraChanger cameraChanger;
+    public CharacterModel[] allChara;
+    public CharacterModel[] masterChara;
+    public CharacterModel[] clientChara;
 
-    private void Start()
+    private void Awake()
     {
         gameManager = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
         cameraChanger = GameObject.FindGameObjectWithTag("CC").GetComponent<CameraChanger>();
+        LoadCharas();
+    }
+
+    public void LoadCharas()
+    {
+        GameObject[] masterCharasObj = GameObject.FindGameObjectsWithTag("MasterCharacter");
+        GameObject[] clientCharasObj = GameObject.FindGameObjectsWithTag("ClientCharacter");
+
+        List<CharacterModel> allCharas = new List<CharacterModel>();
+        List<CharacterModel> masterCharas = new List<CharacterModel>();
+        List<CharacterModel> clientCharas = new List<CharacterModel>();
+
+        foreach (GameObject obj in masterCharasObj)
+        {
+            if (obj.GetComponent<CharacterModel>() != null)
+            {
+                allCharas.Add(obj.GetComponent<CharacterModel>());
+                masterCharas.Add(obj.GetComponent<CharacterModel>());
+            }
+        }
+        foreach (GameObject obj in clientCharasObj)
+        {
+            if (obj.GetComponent<CharacterModel>() != null)
+            {
+                allCharas.Add(obj.GetComponent<CharacterModel>());
+                clientCharas.Add(obj.GetComponent<CharacterModel>());
+            }
+        }
+        allChara = allCharas.ToArray();
+        masterChara = masterCharas.ToArray();
+        clientChara = clientCharas.ToArray();
+    }
+
+    private void Start()
+    {
         if (gameManager == null) Debug.LogError("GameManager not found");
         grids = GameObject.FindGameObjectsWithTag("Grid");
         if (grids == null) Debug.LogError("Grid not found");

@@ -9,7 +9,7 @@ public class CameraChanger : MonoBehaviour
     [SerializeField] GameObject masterCommanderView, clientCommanderView;
     [SerializeField] GameObject characterView;
     [SerializeField] GameObject masterKingAsForCharaViewDefault, clientKingAsForCharaViewDefault;
-    CharacterModel cModelMater, cModelClient;
+    CharacterModel cModelMaster, cModelClient;
     GameManager gameManager;
     CinemachineVirtualCamera _vc;
     BoardManager boardManager;
@@ -41,13 +41,15 @@ public class CameraChanger : MonoBehaviour
         gameManager = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
         _vc = GameObject.FindGameObjectWithTag("VC").GetComponent<CinemachineVirtualCamera>();
         boardManager = GameObject.FindGameObjectWithTag("BM").GetComponent<BoardManager>();
-        cModelMater = masterKingAsForCharaViewDefault.GetComponent<CharacterModel>();
+        cModelMaster = masterKingAsForCharaViewDefault.GetComponent<CharacterModel>();
         cModelClient = clientKingAsForCharaViewDefault.GetComponent<CharacterModel>();
     }
 
     void Start()
     {
-
+        // This is a gurantee for recoverting Awake Method. This is worked as avoiding error
+        cModelMaster = masterKingAsForCharaViewDefault?.GetComponent<CharacterModel>();
+        cModelClient = clientKingAsForCharaViewDefault?.GetComponent<CharacterModel>();
     }
     public void HitGodView()
     {
@@ -105,7 +107,7 @@ public class CameraChanger : MonoBehaviour
         clientCommanderView.SetActive(false);
         characterView.SetActive(true);
         _vc.Follow = boardManager.TouchedChara != null ? boardManager.TouchedChara.transform : gameManager.IsMasterTurn ? masterKingAsForCharaViewDefault.transform : clientKingAsForCharaViewDefault.transform;
-        if (gameManager.IsMasterTurn && cModelMater.IsAlive)
+        if (gameManager.IsMasterTurn && cModelMaster.IsAlive)
         {
             _vc.LookAt = clientKingAsForCharaViewDefault.transform;
         }

@@ -46,6 +46,12 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
     private bool hasCalledFunction = false;
     private bool hasCalledFunction2 = false;
 
+    // [SerializeField] private bool isMasterVisible;
+    public bool isMasterVisible;
+    public bool isClientVisible;
+    public GameObject visible;
+    MovingColider[] movingColiders;
+    List<MovingColider> allMCs = new List<MovingColider>();
 
     void Start()
     {
@@ -60,11 +66,40 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         Debug.Log("child count: " + this.transform.childCount);
         foreach (Transform obj in this.transform)
         {
-            if (obj.gameObject.CompareTag("RoleLetter"))
+            if (obj.gameObject.CompareTag("View"))
             {
-                roleLetter = obj.GetComponent<TMP_Text>();
+                visible = obj.gameObject;
+                foreach (Transform viewObj in obj.transform)
+                {
+                    if (viewObj.gameObject.CompareTag("RoleLetter"))
+                    {
+                        roleLetter = viewObj.GetComponent<TMP_Text>();
+                    }
+                }
                 Debug.Log("FOUND: " + roleLetter);
             }
+        }
+
+        GetMovingColliders();
+        movingColiders = allMCs.ToArray();
+    }
+
+    void Update()
+    {
+        // ShowUpTurnPlayerCharacter();
+    }
+
+    public void ShowUpTurnPlayerCharacter()
+    {
+        if (gameManager.IsMasterTurn && hasMasterOwnership)
+        {
+            visible.SetActive(true);
+            Debug.Log($"show up master {this.id}");
+        }
+        else if (!gameManager.IsMasterTurn && !hasMasterOwnership)
+        {
+            Debug.Log($"show up client {this.id}");
+            visible.SetActive(true);
         }
     }
 
@@ -314,6 +349,58 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
     {
         return ((int)transform.position.x, (int)transform.position.z);
     }
+    private void GetMovingColliders()
+    {
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("VisibleR"))
+        {
+            allMCs.Add(obj.GetComponent<MovingColider>());
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("VisibleL"))
+        {
+            allMCs.Add(obj.GetComponent<MovingColider>());
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("VisibleFS"))
+        {
+            allMCs.Add(obj.GetComponent<MovingColider>());
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("VisibleFR"))
+        {
+            allMCs.Add(obj.GetComponent<MovingColider>());
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("VisibleFL"))
+        {
+            allMCs.Add(obj.GetComponent<MovingColider>());
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("VisibleBR"))
+        {
+            allMCs.Add(obj.GetComponent<MovingColider>());
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("VisibleBL"))
+        {
+            allMCs.Add(obj.GetComponent<MovingColider>());
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("VisibleBS"))
+        {
+            allMCs.Add(obj.GetComponent<MovingColider>());
+        }
+    }
+    public void FireAllMC()
+    {
+        if (hasMasterOwnership && gameManager.IsMasterTurn)
+        {
+            foreach (MovingColider mc in movingColiders)
+            {
+                mc.AllowColliderFire = true;
+            }
+        }
+        else if (!hasMasterOwnership && !gameManager.IsMasterTurn)
+        {
+            foreach (MovingColider mc in movingColiders)
+            {
+                mc.AllowColliderFire = true;
+            }
+        }
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -332,6 +419,31 @@ public class CharacterModel : MonoBehaviour, IPointerClickHandler
         {
             currentPos = other.transform.position;
             boardInfo = other.GetComponent<BoardInfo>();
+        }
+
+        if (gameManager.IsMasterTurn && !HasMasterOwnership)
+        {
+            if (other.gameObject.CompareTag("View"))
+            {
+                Debug.Log(" := tag " + other.gameObject.transform.parent.tag);
+                if (other.gameObject.transform.parent.CompareTag("MasterCharacter"))
+                {
+                    visible.SetActive(true);
+                    Debug.Log($"show up master {other.gameObject.transform.parent.gameObject.GetComponent<CharacterModel>().Id}");
+                }
+            }
+        }
+
+        if (!gameManager.IsMasterTurn && HasMasterOwnership)
+        {
+            if (other.gameObject.CompareTag("View"))
+            {
+                if (other.gameObject.transform.parent.CompareTag("ClientCharacter"))
+                {
+                    visible.SetActive(true);
+                    Debug.Log($"show up client {other.gameObject.transform.parent.gameObject.GetComponent<CharacterModel>().Id}");
+                }
+            }
         }
     }
 }

@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject clientCamera, clientGridCamera;
     [SerializeField] private GameObject GameEndPanel;
     [SerializeField] private TMP_Text WinnerText;
+    [SerializeField] private GameObject tebanStarterPanel;
+    [SerializeField] private TMP_Text nextPlayerText;
     public bool IsMasterTurn
     {
         get { return isMasterTurn; }
@@ -22,6 +24,11 @@ public class GameManager : MonoBehaviour
         {
             isMasterTurn = value;
             cameraChanger.HitCommanderView(false);
+
+            foreach (CharacterModel model in boardManager.allChara)
+            {
+                model.ShowUpTurnPlayerCharacter();
+            }
         }
     }
     private float timeCnt = 0;
@@ -62,10 +69,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    BoardManager boardManager;
+    bool countEnable;
+
     // Start is called before the first frame update
     void Awake()
     {
         cameraChanger = GameObject.FindGameObjectWithTag("CC").GetComponent<CameraChanger>();
+        boardManager = GameObject.FindGameObjectWithTag("BM").GetComponent<BoardManager>();
     }
     void Start()
     {
@@ -76,13 +87,16 @@ public class GameManager : MonoBehaviour
         goteTimeLimit = 60;
         IsMasterTurn = true;
         HasActed = false;
+        tebanStarterPanel.SetActive(false);
+
+        InvisibleCharacter();
     }
 
     // Update is called once per frame
     void Update()
     {
         timeCnt += Time.deltaTime;
-        timeCntTurn += Time.deltaTime;
+        if (countEnable) timeCntTurn += Time.deltaTime;
         entireTime = (int)timeCnt;
         CountDownTimer(IsMasterTurn);
     }
@@ -144,6 +158,39 @@ public class GameManager : MonoBehaviour
         nariPanel.GetComponent<Image>().raycastTarget = false;
         nariPanel.GetComponent<Image>().color = new Color(255, 255, 255, 0);
     }
+    public void ReactTebanPlayerButton()
+    {
+        boardManager.LoadCharas();
+        tebanStarterPanel.SetActive(false);
+        countEnable = true;
+        visibleMovigCollider();
+    }
+
+    private void visibleMovigCollider()
+    {
+        if (IsMasterTurn)
+        {
+            senteTimerText.color = Color.black;
+            senteTimerNum.color = Color.black;
+            goteTimerText.color = Color.gray;
+            goteTimerNum.color = Color.gray;
+            foreach (CharacterModel model in boardManager.masterChara)
+            {
+                model.FireAllMC();
+            }
+        }
+        else
+        {
+            senteTimerText.color = Color.gray;
+            senteTimerNum.color = Color.gray;
+            goteTimerText.color = Color.black;
+            goteTimerNum.color = Color.black;
+            foreach (CharacterModel model in boardManager.clientChara)
+            {
+                model.FireAllMC();
+            }
+        }
+    }
 
     private void CountDownTimer(bool isMaster)
     {
@@ -179,29 +226,53 @@ public class GameManager : MonoBehaviour
 
     public void TurnChange()
     {
+        countEnable = false;
+
         timeCntTurn = 0;
         senteTimeLimit = 59;
         goteTimeLimit = 59;
-        IsMasterTurn = !IsMasterTurn;
         IsCallingNari = false;
-        if (IsMasterTurn)
+
+        ShowTurnPlayerWindow();
+
+        IsMasterTurn = !IsMasterTurn;
+        InvisibleCharacter();
+        HasActed = false;
+        Debug.Log("TURN CHANGED HAVE BEEN CALLED");
+        // CallVisibleChara(isMasterTurn);
+    }
+
+    private void InvisibleCharacter()
+    {
+        if (!IsMasterTurn)
         {
-            senteTimerText.color = Color.black;
-            senteTimerNum.color = Color.black;
-            goteTimerText.color = Color.gray;
-            goteTimerNum.color = Color.gray;
+            foreach (CharacterModel obj in boardManager.masterChara)
+            {
+                obj.visible.SetActive(false);
+                Debug.Log($"master invisible name cara id {obj.Id}");
+            }
         }
         else
         {
-            senteTimerText.color = Color.gray;
-            senteTimerNum.color = Color.gray;
-            goteTimerText.color = Color.black;
-            goteTimerNum.color = Color.black;
+            foreach (CharacterModel obj in boardManager.clientChara)
+            {
+                obj.visible.SetActive(false);
+                Debug.Log($"client invisible name cara id {obj.Id}");
+            }
         }
-        HasActed = false;
-        Debug.Log("TURN CHANGED HAVE BEEN CALLED");
     }
-
+    private void ShowTurnPlayerWindow()
+    {
+        tebanStarterPanel.SetActive(true);
+        if (isMasterTurn)
+        {
+            nextPlayerText.text = "後手の手番です。準備完了ボタンを押して下さい。";
+        }
+        else
+        {
+            nextPlayerText.text = "先手の手番です。準備完了ボタンを押して下さい。";
+        }
+    }
     public void GameEnd(bool isMasterWin)
     {
         Time.timeScale = 0;
